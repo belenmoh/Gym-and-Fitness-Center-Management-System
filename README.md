@@ -22,3 +22,20 @@ View total income and expenses
 Monitor net cash flow
 View monthly financial reports
 Record expenses
+
+## User Hierarchy
+* User (abstract base class)
+* Member extends User
+* Receptionist extends User
+* Admin extends User
+
+## Membership Types
+* Membership (abstract)
+* MonthlyMembership - No discount
+* AnnualMembership - 15% discount
+* VIPMembership - 25% discount
+
+## Financial Models
+* Payment - Records member payments
+* Expense - Tracks gym expenses
+* FinancialReport - Monthly financial summaries
