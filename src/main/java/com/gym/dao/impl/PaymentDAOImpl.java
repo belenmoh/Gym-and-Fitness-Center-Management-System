@@ -92,6 +92,24 @@ public class PaymentDAOImpl implements PaymentDAO{
         }
         return payments;
     }
+
+    @Override
+    public List<Payment> findByMemberId(int memberId) {
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_MEMBER_ID_SQL)) {
+
+            stmt.setInt(1, memberId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                payments.add(mapResultSetToPayment(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding payments by member id", e);
+        }
+        return payments;
+    }
 }
 
 
