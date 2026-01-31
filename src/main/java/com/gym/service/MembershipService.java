@@ -75,4 +75,12 @@ public class MembershipService {
             default -> throw new IllegalArgumentException("Invalid membership type: " + type);
         };
     }
+
+    public double calculateMembershipPrice(Membership membership) {
+        return membership.getPrice() - membership.calculateDiscount();
+    }
+
+    public String getMembershipBenefits(Membership membership) {
+        return membership.getBenefits();
+    }
 }
