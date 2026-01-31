@@ -191,4 +191,17 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         return expense;
     }
 
+    @Override
+    public boolean delete(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(DELETE_SQL)) {
+
+            stmt.setInt(1, id);
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting expense", e);
+        }
+    }
+
 }
