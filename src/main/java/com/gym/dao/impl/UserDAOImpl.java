@@ -140,4 +140,21 @@ public class UserDAOImpl implements UserDAO{
             throw new RuntimeException("Error deleting user", e);
         }
     }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(EXISTS_BY_USERNAME_SQL)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error checking if username exists", e);
+        }
+        return false;
+    }
 }
