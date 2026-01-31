@@ -1,4 +1,7 @@
 package com.gym.model;
 
-public class PaymentType {
+public enum PaymentType {
+    MEMBERSHIP,
+    CLASS,
+    OTHER
 }

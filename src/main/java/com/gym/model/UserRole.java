@@ -1,4 +1,7 @@
 package com.gym.model;
 
-public class UserRole {
+public enum UserRole {
+    MEMBER,
+    RECEPTIONIST,
+    ADMIN
 }
