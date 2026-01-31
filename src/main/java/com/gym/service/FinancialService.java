@@ -41,4 +41,22 @@ public class FinancialService {
     public double getTotalExpensesByMonth(int month, int year) {
         return expenseDAO.getTotalExpensesByMonth(month, year);
     }
+
+    public double getNetCashFlowByMonth(int month, int year) {
+        return getTotalIncomeByMonth(month, year) - getTotalExpensesByMonth(month, year);
+    }
+
+    public FinancialReport getMonthlyReport(int month, int year) {
+        double totalIncome = getTotalIncomeByMonth(month, year);
+        double totalExpenses = getTotalExpensesByMonth(month, year);
+        return new FinancialReport(month, year, totalIncome, totalExpenses);
+    }
+
+    public List<FinancialReport> getYearlyReport(int year) {
+        List<FinancialReport> reports = new java.util.ArrayList<>();
+        for (int month = 1; month <= 12; month++) {
+            reports.add(getMonthlyReport(month, year));
+        }
+        return reports;
+    }
 }
