@@ -11,7 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 public class PaymentDAOImpl implements PaymentDAO{
-
+    private static final String INSERT_SQL =
+            "INSERT INTO payments (member_id, amount, date, type) VALUES (?, ?, ?, ?)";
+    private static final String SELECT_BY_ID_SQL =
+            "SELECT * FROM payments WHERE id = ?";
+    private static final String SELECT_ALL_SQL =
+            "SELECT * FROM payments";
+    private static final String SELECT_BY_MEMBER_ID_SQL =
+            "SELECT * FROM payments WHERE member_id = ?";
+    private static final String SELECT_BY_DATE_RANGE_SQL =
+            "SELECT * FROM payments WHERE date BETWEEN ? AND ?";
+    private static final String SELECT_BY_TYPE_SQL =
+            "SELECT * FROM payments WHERE type = ?";
+    private static final String SELECT_BY_MONTH_SQL =
+            "SELECT * FROM payments WHERE strftime('%m', date) = ? AND strftime('%Y', date) = ?";
+    private static final String SELECT_TOTAL_INCOME_BY_MONTH_SQL =
+            "SELECT COALESCE(SUM(amount), 0) FROM payments WHERE datetime(date/1000, 'unixepoch', 'localtime') LIKE ? || '%'";
+    private static final String UPDATE_SQL =
+            "UPDATE payments SET member_id = ?, amount = ?, date = ?, type = ? WHERE id = ?";
+    private static final String DELETE_SQL =
+            "DELETE FROM payments WHERE id = ?";
 }
 
 
