@@ -90,4 +90,20 @@ public class UserDAOImpl implements UserDAO{
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                users.add(mapResultSetToUser(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all users", e);
+        }
+        return users;
+    }
 }
