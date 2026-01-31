@@ -45,4 +45,20 @@ public class MembershipService {
 
         return memberDAO.update(member);
     }
+
+    public Optional<Member> findMemberById(int id) {
+        return memberDAO.findById(id);
+    }
+
+    public List<Member> getAllMembers() {
+        return memberDAO.findAll();
+    }
+
+    public List<Member> getActiveMembers() {
+        return memberDAO.findActiveMembers();
+    }
+
+    public List<Member> getMembersByMembershipType(String membershipType) {
+        return memberDAO.findByMembershipType(membershipType);
+    }
 }
