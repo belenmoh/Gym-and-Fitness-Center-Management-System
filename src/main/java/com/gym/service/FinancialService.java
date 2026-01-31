@@ -138,4 +138,8 @@ public class FinancialService {
         LocalDate now = LocalDate.now();
         return getMonthlyReport(now.getMonthValue(), now.getYear());
     }
+    public FinancialReport getPreviousMonthReport() {
+        LocalDate now = LocalDate.now().minusMonths(1);
+        return getMonthlyReport(now.getMonthValue(), now.getYear());
+    }
 }
