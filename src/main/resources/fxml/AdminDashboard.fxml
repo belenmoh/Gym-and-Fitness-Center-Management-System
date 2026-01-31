@@ -64,7 +64,33 @@
                 </Tab>
                 <Tab text="Renew Membership">
                     <content>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                            <children>
+                                <VBox styleClass="card" spacing="20.0">
+                                    <children>
+                                        <Label text="Renew Membership" styleClass="title" />
+                                        <GridPane hgap="20.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Member ID:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <TextField fx:id="renewMemberIdField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
+                                                <Label text="New Membership:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <ComboBox fx:id="renewMembershipCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Price:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <TextField fx:id="renewPriceField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="120.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                        <Button fx:id="renewMembershipButton" onAction="#handleRenewMembership" styleClass="highlight-button" text="Renew Membership" />
+                                        <Label fx:id="renewMessageLabel" styleClass="subtitle" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
                     </content>
                 </Tab>
                 <Tab text="Record Payment">
