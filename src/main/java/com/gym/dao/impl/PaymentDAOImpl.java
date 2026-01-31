@@ -151,6 +151,25 @@ public class PaymentDAOImpl implements PaymentDAO{
         }
         return payments;
     }
+
+    @Override
+    public List<Payment> findByMonth(int month, int year) {
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_MONTH_SQL)) {
+
+            stmt.setString(1, String.format("%02d", month));
+            stmt.setString(2, String.valueOf(year));
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                payments.add(mapResultSetToPayment(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding payments by month", e);
+        }
+        return payments;
+    }
 }
 
 
