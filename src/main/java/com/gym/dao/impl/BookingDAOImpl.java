@@ -113,4 +113,22 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return bookings;
     }
+
+    @Override
+    public List<Booking> findByClassName(String className) {
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_CLASS_NAME_SQL)) {
+
+            stmt.setString(1, className);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bookings.add(mapResultSetToBooking(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding bookings by class name", e);
+        }
+        return bookings;
+    }
 }
