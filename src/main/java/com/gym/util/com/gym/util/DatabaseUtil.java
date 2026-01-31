@@ -111,4 +111,22 @@ public class DatabaseUtil {
             }
         }
     }
+
+    public static void resetDatabase() {
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement()) {
+
+            stmt.execute("DROP TABLE IF EXISTS bookings");
+            stmt.execute("DROP TABLE IF EXISTS expenses");
+            stmt.execute("DROP TABLE IF EXISTS payments");
+            stmt.execute("DROP TABLE IF EXISTS members");
+            stmt.execute("DROP TABLE IF EXISTS users");
+
+            initialized = false;
+            initializeDatabase();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to reset database", e);
+        }
+    }
 }
