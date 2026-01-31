@@ -11,4 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class BillingService {
+    private final PaymentDAO paymentDAO;
+    private final com.gym.service.MembershipService membershipService;
+
+    public BillingService(PaymentDAO paymentDAO, com.gym.service.MembershipService membershipService) {
+        this.paymentDAO = paymentDAO;
+        this.membershipService = membershipService;
+    }
 }
