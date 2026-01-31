@@ -111,4 +111,26 @@ public class FinancialService {
         }
         return count;
     }
+
+    public double getBestMonthIncome(int year) {
+        double maxIncome = 0;
+        for (int month = 1; month <= 12; month++) {
+            double monthlyIncome = getTotalIncomeByMonth(month, year);
+            if (monthlyIncome > maxIncome) {
+                maxIncome = monthlyIncome;
+            }
+        }
+        return maxIncome;
+    }
+
+    public double getWorstMonthIncome(int year) {
+        double minIncome = Double.MAX_VALUE;
+        for (int month = 1; month <= 12; month++) {
+            double monthlyIncome = getTotalIncomeByMonth(month, year);
+            if (monthlyIncome < minIncome && monthlyIncome > 0) {
+                minIncome = monthlyIncome;
+            }
+        }
+        return minIncome == Double.MAX_VALUE ? 0 : minIncome;
+    }
 }
