@@ -31,6 +31,34 @@ public class PaymentDAOImpl implements PaymentDAO{
             "UPDATE payments SET member_id = ?, amount = ?, date = ?, type = ? WHERE id = ?";
     private static final String DELETE_SQL =
             "DELETE FROM payments WHERE id = ?";
+
+    @Override
+    public Payment save(Payment payment) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, payment.getMemberId());
+            stmt.setDouble(2, payment.getAmount());
+            stmt.setDate(3, Date.valueOf(payment.getDate()));
+            stmt.setString(4, payment.getType().name());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating payment failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    payment.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating payment failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving payment", e);
+        }
+        return payment;
+    }
 }
 
 
