@@ -75,4 +75,20 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<Expense> findAll() {
+        List<Expense> expenses = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                expenses.add(mapResultSetToExpense(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all expenses", e);
+        }
+        return expenses;
+    }
 }
