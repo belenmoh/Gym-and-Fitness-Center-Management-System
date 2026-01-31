@@ -210,6 +210,29 @@ public class MemberDAOImpl implements MemberDAO{
             }
         }
 
+        try {
+            Date endDate = rs.getDate("end_date");
+            if (endDate != null) {
+                member.setEndDate(endDate.toLocalDate());
+            }
+        } catch (Exception e) {
+            // If date parsing fails, try to parse as timestamp
+            try {
+                long timestamp = rs.getLong("end_date");
+                if (!rs.wasNull()) {
+                    member.setEndDate(new java.util.Date(timestamp).toInstant()
+                            .atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+                }
+            } catch (Exception ex) {
+                member.setEndDate(null);
+            }
+        }
+
+        String membershipType = rs.getString("membership_type");
+        Membership membership = createMembershipFromType(membershipType);
+        member.setMembership(membership);
+
+        return member;
 
     }
 
