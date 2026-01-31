@@ -131,4 +131,22 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return bookings;
     }
+
+    @Override
+    public List<Booking> findByStatus(BookingStatus status) {
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_STATUS_SQL)) {
+
+            stmt.setString(1, status.name());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bookings.add(mapResultSetToBooking(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding bookings by status", e);
+        }
+        return bookings;
+    }
 }
