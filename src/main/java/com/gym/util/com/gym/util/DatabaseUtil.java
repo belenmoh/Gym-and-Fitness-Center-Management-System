@@ -49,4 +49,17 @@ public class DatabaseUtil {
         """;
         stmt.execute(sql);
     }
+
+    private static void createExpensesTable(Statement stmt) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS expenses (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                description TEXT NOT NULL,
+                amount REAL NOT NULL,
+                date TEXT NOT NULL,
+                category TEXT NOT NULL CHECK (category IN ('SALARY', 'EQUIPMENT', 'MAINTENANCE', 'UTILITIES', 'MARKETING', 'OTHER'))
+            )
+        """;
+        stmt.execute(sql);
+    }
 }
