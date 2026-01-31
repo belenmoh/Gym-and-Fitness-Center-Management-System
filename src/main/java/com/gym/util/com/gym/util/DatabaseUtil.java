@@ -21,4 +21,18 @@ public class DatabaseUtil {
         """;
         stmt.execute(sql);
     }
+
+    private static void createMembersTable(Statement stmt) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS members (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                membership_type TEXT NOT NULL,
+                start_date TEXT,
+                end_date TEXT,
+                FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+            )
+        """;
+        stmt.execute(sql);
+    }
 }
