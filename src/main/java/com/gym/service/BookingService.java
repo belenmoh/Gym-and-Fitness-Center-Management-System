@@ -17,4 +17,27 @@ public class BookingService {
         this.bookingDAO = bookingDAO;
         this.memberDAO = memberDAO;
     }
+
+    public Booking bookClass(int memberId, String className, LocalDateTime classTime) {
+        if (!memberDAO.findById(memberId).isPresent()) {
+            throw new IllegalArgumentException("Member not found");
+        }
+
+        if (classTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Cannot book classes in the past");
+        }
+
+        if (hasConflictingBooking(memberId, classTime)) {
+            throw new IllegalArgumentException("Member already has a booking at this time");
+        }
+
+        Booking booking = new Booking();
+        booking.setMemberId(memberId);
+        booking.setClassName(className);
+        booking.setBookingTime(LocalDateTime.now());
+        booking.setClassTime(classTime);
+        booking.setStatus(BookingStatus.BOOKED);
+
+        return bookingDAO.save(booking);
+    }
 }
