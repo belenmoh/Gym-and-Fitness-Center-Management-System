@@ -133,4 +133,22 @@ public class MemberDAOImpl implements MemberDAO{
         return members;
     }
 
+    @Override
+    public List<Member> findActiveMembers() {
+        List<Member> members = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ACTIVE_MEMBERS_SQL)) {
+
+            stmt.setDate(1, Date.valueOf(LocalDate.now()));
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                members.add(mapResultSetToMember(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding active members", e);
+        }
+        return members;
+    }
+
 }
