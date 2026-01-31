@@ -157,4 +157,42 @@ public class UserDAOImpl implements UserDAO{
         }
         return false;
     }
+
+    private User mapResultSetToUser(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String name = rs.getString("name");
+        String username = rs.getString("username");
+        String password = rs.getString("password");
+        String roleStr = rs.getString("role");
+        UserRole role = UserRole.valueOf(roleStr);
+
+        return switch (role) {
+            case MEMBER -> {
+                Member member = new Member();
+                member.setId(id);
+                member.setName(name);
+                member.setUsername(username);
+                member.setPassword(password);
+                member.setRole(role);
+                yield member;
+            }
+            case RECEPTIONIST -> {
+                Receptionist receptionist = new Receptionist();
+                receptionist.setId(id);
+                receptionist.setName(name);
+                receptionist.setUsername(username);
+                receptionist.setPassword(password);
+                receptionist.setRole(role);
+                yield receptionist;
+            }
+            case ADMIN -> {
+                Admin admin = new Admin();
+                admin.setId(id);
+                admin.setName(name);
+                admin.setUsername(username);
+                admin.setPassword(password);
+                admin.setRole(role);
+                yield admin;
+            }
+        };
 }
