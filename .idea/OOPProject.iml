@@ -3,6 +3,8 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/gym/controller" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/gym/service" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/gym/dao" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/gym/util" isTestSource="false" />
