@@ -77,6 +77,21 @@ public class PaymentDAOImpl implements PaymentDAO{
         return Optional.empty();
     }
 
+    @Override
+    public List<Payment> findAll() {
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                payments.add(mapResultSetToPayment(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all payments", e);
+        }
+        return payments;
+    }
 }
 
 
