@@ -63,4 +63,24 @@ public class BillingService {
 
         return paymentDAO.save(payment);
     }
+
+    public Optional<Payment> findPaymentById(int id) {
+        return paymentDAO.findById(id);
+    }
+
+    public List<Payment> getPaymentsByMember(int memberId) {
+        return paymentDAO.findByMemberId(memberId);
+    }
+
+    public List<Payment> getPaymentsByType(PaymentType type) {
+        return paymentDAO.findByType(type);
+    }
+
+    public List<Payment> getPaymentsByDateRange(LocalDate startDate, LocalDate endDate) {
+        return paymentDAO.findByDateRange(startDate, endDate);
+    }
+
+    public List<Payment> getPaymentsByMonth(int month, int year) {
+        return paymentDAO.findByMonth(month, year);
+    }
 }
