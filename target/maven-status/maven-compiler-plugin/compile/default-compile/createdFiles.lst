@@ -29,10 +29,12 @@ com\gym\model\BookingStatus.class
 com\gym\model\Membership.class
 com\gym\dao\UserDAO.class
 com\gym\dao\MemberDAO.class
+com\gym\Main.class
 com\gym\controller\ReceptionistDashboardController.class
 com\gym\model\User.class
 com\gym\service\FinancialService.class
 com\gym\model\Booking.class
+com\gym\GymApplication.class
 com\gym\model\MonthlyMembership.class
 com\gym\model\Payment.class
 com\gym\model\UserRole.class
