@@ -23,4 +23,22 @@ public class FinancialService {
                 .mapToDouble(Payment::getAmount)
                 .sum();
     }
+
+    public double getTotalExpenses() {
+        return expenseDAO.findAll().stream()
+                .mapToDouble(Expense::getAmount)
+                .sum();
+    }
+
+    public double getNetCashFlow() {
+        return getTotalIncome() - getTotalExpenses();
+    }
+
+    public double getTotalIncomeByMonth(int month, int year) {
+        return paymentDAO.getTotalIncomeByMonth(month, year);
+    }
+
+    public double getTotalExpensesByMonth(int month, int year) {
+        return expenseDAO.getTotalExpensesByMonth(month, year);
+    }
 }
