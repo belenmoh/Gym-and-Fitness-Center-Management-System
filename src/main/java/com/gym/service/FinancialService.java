@@ -10,4 +10,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class FinancialService {
+    private final PaymentDAO paymentDAO;
+    private final ExpenseDAO expenseDAO;
+
+    public FinancialService(PaymentDAO paymentDAO, ExpenseDAO expenseDAO) {
+        this.paymentDAO = paymentDAO;
+        this.expenseDAO = expenseDAO;
+    }
 }
