@@ -110,6 +110,30 @@ public class PaymentDAOImpl implements PaymentDAO{
         }
         return payments;
     }
+
+    @Override
+    public List<Payment> findByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_DATE_RANGE_SQL)) {
+
+            // Convert LocalDate to timestamp (milliseconds since epoch)
+            long startTimestamp = startDate.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
+            long endTimestamp = endDate.plusDays(1).atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli(); // Add 1 day to include end date
+
+            stmt.setLong(1, startTimestamp);
+            stmt.setLong(2, endTimestamp);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                payments.add(mapResultSetToPayment(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding payments by date range", e);
+        }
+        return payments;
+    }
+
 }
 
 
