@@ -91,4 +91,24 @@ public class FinancialService {
         }
         return totalYearlyExpenses / 12;
     }
+
+    public int getProfitableMonthsCount(int year) {
+        int count = 0;
+        for (int month = 1; month <= 12; month++) {
+            if (getNetCashFlowByMonth(month, year) > 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getLossMonthsCount(int year) {
+        int count = 0;
+        for (int month = 1; month <= 12; month++) {
+            if (getNetCashFlowByMonth(month, year) < 0) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
