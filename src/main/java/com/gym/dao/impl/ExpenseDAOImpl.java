@@ -58,4 +58,21 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         }
         return expense;
     }
+
+    @Override
+    public Optional<Expense> findById(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return Optional.of(mapResultSetToExpense(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding expense by id", e);
+        }
+        return Optional.empty();
+    }
 }
