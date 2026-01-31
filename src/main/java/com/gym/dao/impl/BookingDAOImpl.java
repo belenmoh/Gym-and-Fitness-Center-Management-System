@@ -168,4 +168,26 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return bookings;
     }
+
+    @Override
+    public Booking update(Booking booking) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
+
+            stmt.setInt(1, booking.getMemberId());
+            stmt.setString(2, booking.getClassName());
+            stmt.setString(3, booking.getBookingTime().format(DATE_TIME_FORMATTER));
+            stmt.setString(4, booking.getClassTime().format(DATE_TIME_FORMATTER));
+            stmt.setString(5, booking.getStatus().name());
+            stmt.setInt(6, booking.getId());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating booking failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating booking", e);
+        }
+        return booking;
+    }
 }
