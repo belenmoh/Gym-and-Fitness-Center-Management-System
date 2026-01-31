@@ -4,15 +4,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane>
+<BorderPane prefHeight="650.0" prefWidth="850.0" styleClass="reception-theme" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.ReceptionistDashboardController">
     <top>
-        <VBox>
+        <VBox style="-fx-background-color: #546E7A; -fx-padding: 15;">
             <children>
-                <Label>
-
+                <Label text="Receptionist Dashboard" styleClass="title" textFill="white">
+                    <font>
+                        <Font name="Segoe UI Bold" size="22.0" />
+                    </font>
                 </Label>
-                <HBox>
-
+                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                    <children>
+                        <Label fx:id="welcomeLabel" text="Welcome:" styleClass="subtitle" textFill="white" />
+                        <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="button" text="Logout" />
+                    </children>
                 </HBox>
             </children>
         </VBox>
