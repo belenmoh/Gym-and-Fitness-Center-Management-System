@@ -83,4 +83,17 @@ public class BillingService {
     public List<Payment> getPaymentsByMonth(int month, int year) {
         return paymentDAO.findByMonth(month, year);
     }
+
+    public double getTotalPaymentsByMember(int memberId) {
+        return paymentDAO.findByMemberId(memberId).stream()
+                .mapToDouble(Payment::getAmount)
+                .sum();
+    }
+
+    public double getTotalPaymentsByMemberAndType(int memberId, PaymentType type) {
+        return paymentDAO.findByMemberId(memberId).stream()
+                .filter(payment -> payment.getType() == type)
+                .mapToDouble(Payment::getAmount)
+                .sum();
+    }
 }
