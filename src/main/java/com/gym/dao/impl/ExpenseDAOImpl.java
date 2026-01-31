@@ -114,5 +114,22 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         return expenses;
     }
 
+    @Override
+    public List<Expense> findByCategory(ExpenseCategory category) {
+        List<Expense> expenses = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_CATEGORY_SQL)) {
+
+            stmt.setString(1, category.name());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                expenses.add(mapResultSetToExpense(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding expenses by category", e);
+        }
+        return expenses;
+    }
 
 }
