@@ -35,4 +35,18 @@ public class DatabaseUtil {
         """;
         stmt.execute(sql);
     }
+
+    private static void createPaymentsTable(Statement stmt) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS payments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                member_id INTEGER NOT NULL,
+                amount REAL NOT NULL,
+                date TEXT NOT NULL,
+                type TEXT NOT NULL CHECK (type IN ('MEMBERSHIP', 'CLASS', 'OTHER')),
+                FOREIGN KEY (member_id) REFERENCES members (id) ON DELETE CASCADE
+            )
+        """;
+        stmt.execute(sql);
+    }
 }
