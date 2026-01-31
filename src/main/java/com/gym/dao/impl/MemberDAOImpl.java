@@ -64,4 +64,21 @@ public class MemberDAOImpl implements MemberDAO{
         }
         return member;
     }
+
+    @Override
+    public Optional<Member> findById(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return Optional.of(mapResultSetToMember(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding member by id", e);
+        }
+        return Optional.empty();
+    }
 }
