@@ -4,11 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<BorderPane prefHeight="650.0" prefWidth="850.0" styleClass="reception-theme" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.ReceptionistDashboardController">
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" styleClass="admin-theme" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.AdminDashboardController">
     <top>
-        <VBox style="-fx-background-color: #546E7A; -fx-padding: 15;">
+        <VBox style="-fx-background-color: #1A1A2E; -fx-padding: 15;">
             <children>
-                <Label text="Receptionist Dashboard" styleClass="title" textFill="white">
+                <Label text="Admin Dashboard - Financial Management" styleClass="title" textFill="white">
                     <font>
                         <Font name="Segoe UI Bold" size="22.0" />
                     </font>
@@ -25,126 +26,148 @@
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Register Member">
+                <Tab text="Financial Overview">
                     <content>
-                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                        <VBox spacing="25.0" style="-fx-padding: 25;">
                             <children>
-                                <VBox styleClass="card" spacing="20.0">
+                                <Label text="Financial Summary" styleClass="title" />
+                                <HBox spacing="20.0" alignment="CENTER">
                                     <children>
-                                        <Label text="Register New Member" styleClass="title"/>
-                                        <GridPane hgap="20.0" vgap="15.0">
+                                        <VBox styleClass="card" spacing="10.0" prefWidth="250.0">
                                             <children>
-                                                <Label text="Name:" styleClass="label-header" GridPane.rowIndex="0" />
-                                                <TextField fx:id="memberNameField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                                                <Label text="Username:" styleClass="label-header" GridPane.rowIndex="1" />
-                                                <TextField fx:id="memberUsernameField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                                                <Label text="Password:" styleClass="label-header" GridPane.rowIndex="2" />
-                                                <PasswordField fx:id="memberPasswordField" styleClass="password-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                                                <Label text="Membership Type:" styleClass="label-header" GridPane.rowIndex="3" />
-                                                <ComboBox fx:id="membershipTypeCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                                                <Label text="Price:" styleClass="label-header" GridPane.rowIndex="4" />
-                                                <Label fx:id="membershipPriceLabel" styleClass="price-display" text="ETB 0.00" GridPane.columnIndex="1" GridPane.rowIndex="4" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
+                                                <Label text="Total Income" styleClass="label-header" />
+                                                <Label fx:id="totalIncomeLabel" styleClass="positive" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
                                             </children>
-                                            <colunmConstraints>
-                                                <ColumnConstraints prefWidth="120.0" />
-                                                <ColumnConstraints prefWidth="200.0" />
-                                            </colunmConstraints>
-                                        </GridPane>
-                                        <Button fx:id="registerMemberButton" onAction="#handleRegisterMember" styleClass="highlight-button" text="Register Member" />
-                                        <Label fx:id="registerMessageLabel" styleClass="subtitle" />
+                                        </VBox>
+                                        <VBox styleClass="card" spacing="10.0" prefWidth="250.0">
+                                            <children>
+                                                <Label text="Total Expenses" styleClass="label-header" />
+                                                <Label fx:id="totalExpensesLabel" styleClass="negative" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                                            </children>
+                                        </VBox>
+                                        <VBox styleClass="card" spacing="10.0" prefWidth="250.0">
+                                            <children>
+                                                <Label text="Net Cash Flow" styleClass="label-header" />
+                                                <Label fx:id="netCashFlowLabel" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                                            </children>
+                                        </VBox>
                                     </children>
-                                </VBox>
+                                </HBox>
+                                <Button fx:id="refreshFinancialButton" onAction="#handleRefreshFinancial" styleClass="button" text="Refresh Data" />
                             </children>
                         </VBox>
                     </content>
                 </Tab>
-                <Tab text="Renew Membership">
-                    <content>
-                        <VBox spacing="20.0" style="-fx-padding: 25;">
-                            <children>
-                                <VBox styleClass="card" spacing="20.0">
-                                    <children>
-                                        <Label text="Renew Membership" styleClass="title" />
-                                        <GridPane hgap="20.0" vgap="15.0">
-                                            <children>
-                                                <Label text="Member ID:" styleClass="label-header" GridPane.rowIndex="0" />
-                                                <TextField fx:id="renewMemberIdField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                                                <Label text="New Membership:" styleClass="label-header" GridPane.rowIndex="1" />
-                                                <ComboBox fx:id="renewMembershipCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                                                <Label text="Price:" styleClass="label-header" GridPane.rowIndex="2" />
-                                                <TextField fx:id="renewPriceField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                            </children>
-                                            <columnConstraints>
-                                                <ColumnConstraints prefWidth="120.0" />
-                                                <ColumnConstraints prefWidth="200.0" />
-                                            </columnConstraints>
-                                        </GridPane>
-                                        <Button fx:id="renewMembershipButton" onAction="#handleRenewMembership" styleClass="highlight-button" text="Renew Membership" />
-                                        <Label fx:id="renewMessageLabel" styleClass="subtitle" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </VBox>
-                    </content>
-                </Tab>
-                <Tab text="Record Payment">
-                    <content>
-                        <VBox spacing="20.0" style="-fx-padding: 25;">
-                            <children>
-                                <VBox styleClass="card" spacing="20.0">
-                                    <children>
-                                        <Label text="Record Payment" styleClass="title" />
-                                        <GridPane hgap="20.0" vgap="15.0">
-                                            <children>
-                                                <Label text="Member ID:" styleClass="label-header" GridPane.rowIndex="0" />
-                                                <TextField fx:id="paymentMemberIdField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                                                <Label text="Amount:" styleClass="label-header" GridPane.rowIndex="1" />
-                                                <TextField fx:id="paymentAmountField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                                                <Label text="Payment Type:" styleClass="label-header" GridPane.rowIndex="2" />
-                                                <ComboBox fx:id="paymentTypeCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                            </children>
-                                            <columnConstraints>
-                                                <ColumnConstraints prefWidth="120.0" />
-                                                <ColumnConstraints prefWidth="200.0" />
-                                            </columnConstraints>
-                                        </GridPane>
-                                        <Button fx:id="recordPaymentButton" onAction="#handleRecordPayment" styleClass="highlight-button" text="Record Payment" />
-                                        <Label fx:id="paymentMessageLabel" styleClass="subtitle" />
-                                    </children>
-                                </VBox>
-                            </children>
-                        </VBox>
-                    </content>
-                </Tab>
-                <Tab text="View Members">
+                <Tab text="Payments">
                     <content>
                         <VBox spacing="15.0" style="-fx-padding: 25;">
                             <children>
-                                <Label text="All Members" styleClass="title" />
-                                <TableView fx:id="membersTableView" prefHeight="350.0" prefWidth="750.0">
+                                <Label text="All Payments" styleClass="title" />
+                                <TableView fx:id="paymentsTableView" prefHeight="400.0" prefWidth="800.0">
                                     <columns>
-                                        <TableColumn fx:id="memberIdColumn" prefWidth="75.0" text="ID" />
-                                        <TableColumn fx:id="memberNameColumn" prefWidth="150.0" text="Name" />
-                                        <TableColumn fx:id="memberUsernameColumn" prefWidth="150.0" text="Username" />
-                                        <TableColumn fx:id="memberMembershipColumn" prefWidth="150.0" text="Membership" />
-                                        <TableColumn fx:id="memberEndDateColumn" prefWidth="150.0" text="End Date" />
+                                        <TableColumn fx:id="paymentIdColumn" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="paymentMemberIdColumn" prefWidth="100.0" text="Member ID" />
+                                        <TableColumn fx:id="paymentAmountColumn" prefWidth="100.0" text="Amount" />
+                                        <TableColumn fx:id="paymentDateColumn" prefWidth="150.0" text="Date" />
+                                        <TableColumn fx:id="paymentTypeColumn" prefWidth="150.0" text="Type" />
                                     </columns>
                                 </TableView>
-                                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                                <Button fx:id="refreshPaymentsButton" onAction="#handleRefreshPayments" styleClass="button" text="Refresh" />
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Expenses">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                            <children>
+                                <Label text="Expense Management" styleClass="title" />
+                                <VBox styleClass="card" spacing="15.0">
                                     <children>
-                                        <Button fx:id="refreshMembersButton" onAction="#handleRefreshMembers" styleClass="button" text="Refresh" />
-                                        <Button fx:id="cancelMembershipButton" onAction="#handleCancelMembership" styleClass="button" text="Cancel Membership" style="-fx-background-color: #e74c3c;" />
-                                        <Label fx:id="cancelMembershipMessageLabel" styleClass="subtitle" />
+                                        <GridPane hgap="15.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Description:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <TextField fx:id="expenseDescriptionField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                                <Label text="Amount:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <TextField fx:id="expenseAmountField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Date:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <DatePicker fx:id="expenseDatePicker" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                                <Label text="Category:" styleClass="label-header" GridPane.rowIndex="3" />
+                                                <ComboBox fx:id="expenseCategoryCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="120.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                        <Button fx:id="addExpenseButton" onAction="#handleAddExpense" styleClass="button" text="Add Expense" />
+                                        <Label fx:id="expenseMessageLabel" styleClass="subtitle" />
                                     </children>
-                                </HBox>
+                                </VBox>
+
+                                <Label text="All Expenses" styleClass="title" />
+                                <TableView fx:id="expensesTableView" prefHeight="250.0" prefWidth="800.0">
+                                    <columns>
+                                        <TableColumn fx:id="expenseIdColumn" prefWidth="50.0" text="ID" />
+                                        <TableColumn fx:id="expenseDescriptionColumn" prefWidth="200.0" text="Description" />
+                                        <TableColumn fx:id="expenseAmountColumn" prefWidth="100.0" text="Amount" />
+                                        <TableColumn fx:id="expenseDateColumn" prefWidth="150.0" text="Date" />
+                                        <TableColumn fx:id="expenseCategoryColumn" prefWidth="150.0" text="Category" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="refreshExpensesButton" onAction="#handleRefreshExpenses" styleClass="button" text="Refresh" />
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Monthly Reports">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                            <children>
+                                <Label text="Generate Monthly Financial Report" styleClass="title" />
+                                <VBox styleClass="card" spacing="15.0">
+                                    <children>
+                                        <GridPane hgap="15.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Month:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <ComboBox fx:id="reportMonthCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                                <Label text="Year:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <ComboBox fx:id="reportYearCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="120.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                        <Button fx:id="generateReportButton" onAction="#handleGenerateReport" styleClass="button" text="Generate Report" />
+                                    </children>
+                                </VBox>
+
+                                <VBox styleClass="card" spacing="15.0">
+                                    <children>
+                                        <Label fx:id="reportTitleLabel" styleClass="title" />
+                                        <GridPane hgap="25.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Total Income:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <Label fx:id="reportIncomeLabel" styleClass="positive" style="-fx-font-size: 18px; -fx-font-weight: bold;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                                <Label text="Total Expenses:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <Label fx:id="reportExpensesLabel" styleClass="negative" style="-fx-font-size: 18px; -fx-font-weight: bold;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Net Cash Flow:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <Label fx:id="reportNetFlowLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="150.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
                             </children>
                         </VBox>
                     </content>
