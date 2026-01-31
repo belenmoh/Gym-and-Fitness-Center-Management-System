@@ -32,4 +32,34 @@ public class BookingDAOImpl implements BookingDAO {
             "UPDATE bookings SET member_id = ?, class_name = ?, booking_time = ?, class_time = ?, status = ? WHERE id = ?";
     private static final String DELETE_SQL =
             "DELETE FROM bookings WHERE id = ?";
+
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    @Override
+    public Booking save(Booking booking) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, booking.getMemberId());
+            stmt.setString(2, booking.getClassName());
+            stmt.setString(3, booking.getBookingTime().format(DATE_TIME_FORMATTER));
+            stmt.setString(4, booking.getClassTime().format(DATE_TIME_FORMATTER));
+            stmt.setString(5, booking.getStatus().name());
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating booking failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    booking.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating booking failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving booking", e);
+        }
+        return booking;
+    }
 }
