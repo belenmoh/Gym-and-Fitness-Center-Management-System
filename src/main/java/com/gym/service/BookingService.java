@@ -40,4 +40,19 @@ public class BookingService {
 
         return bookingDAO.save(booking);
     }
+
+    public Booking cancelBooking(int bookingId) {
+        Optional<Booking> bookingOpt = bookingDAO.findById(bookingId);
+        if (bookingOpt.isEmpty()) {
+            throw new IllegalArgumentException("Booking not found");
+        }
+
+        Booking booking = bookingOpt.get();
+        if (booking.getStatus() != BookingStatus.BOOKED) {
+            throw new IllegalArgumentException("Cannot cancel a booking that is not in BOOKED status");
+        }
+
+        booking.setStatus(BookingStatus.CANCELLED);
+        return bookingDAO.update(booking);
+    }
 }
