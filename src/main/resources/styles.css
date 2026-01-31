@@ -1,0 +1,102 @@
+/* Global Styles */
+
+@font-face {
+    font-family: 'Oswald-Bold';
+    src: url('fonts/Oswald-Bold.ttf');
+}
+
+.login-background {
+    -fx-background-image: url("images/login_bg3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-blend-mode: overlay;
+}
+
+.title {
+    -fx-font-family: 'Oswald-Bold';
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+    -fx-text-fill: #FFFFFF;
+    -fx-ellipsis-string: "";
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.login-header {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E6B0AA;
+    -fx-underline: true;
+}
+
+.label-header {
+    -fx-text-fill: #FADBD8;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-letter-spacing: 1px;
+}
+
+.card {
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(69, 11, 11, 0.35); /* Deep Wine Tint */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 20, 0, 0, 10);
+    -fx-border-color: rgba(255, 184, 184, 0.15);
+    -fx-border-radius: 20;
+    -fx-border-width: 1.5;
+}
+.label-value {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+}
+.financial-summary-box {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+.admin-theme {
+    -fx-background-image: url("images/login_bg3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-blend-mode: overlay;
+}
+.label-header-admin{
+    -fx-text-fill: #FADBD8;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-letter-spacing: 1px;
+}
+.admin-dashboard{
+    -fx-background-color: rgba(62, 33, 57, 0.7);
+    -fx-padding: 15;
+}
+
+.admin-tabpane .tab-header-area {
+    -fx-background-color: rgba(62, 33, 57, 0.7);
+    -fx-padding: 5 10 0 10;
+}
+
+.admin-tabpane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.admin-tabpane .tab {
+    -fx-background-color: rgba(62, 33, 57, 0.9);
+    -fx-background-radius: 8 8 0 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8 8 8 8;
+    /*-fx-border-width: 1;
+*/
+    /* ADD OR UPDATE THESE TWO LINES */
+    -fx-padding: 8 25 8 25;       /* Increases internal horizontal spacing */
+    -fx-background-insets: 0 5 5 0; /* Creates external visual gap to the right */
+}
