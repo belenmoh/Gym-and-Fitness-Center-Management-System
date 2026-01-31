@@ -189,6 +189,40 @@ public class PaymentDAOImpl implements PaymentDAO{
         }
         return 0.0;
     }
+
+    @Override
+    public Payment update(Payment payment) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
+
+            stmt.setInt(1, payment.getMemberId());
+            stmt.setDouble(2, payment.getAmount());
+            stmt.setDate(3, Date.valueOf(payment.getDate()));
+            stmt.setString(4, payment.getType().name());
+            stmt.setInt(5, payment.getId());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating payment failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating payment", e);
+        }
+        return payment;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(DELETE_SQL)) {
+
+            stmt.setInt(1, id);
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting payment", e);
+        }
+    }
 }
 
 
