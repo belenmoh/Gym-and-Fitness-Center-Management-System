@@ -190,4 +190,17 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return booking;
     }
+
+    @Override
+    public boolean delete(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(DELETE_SQL)) {
+
+            stmt.setInt(1, id);
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting booking", e);
+        }
+    }
 }
