@@ -23,4 +23,124 @@
             </children>
         </VBox>
     </top>
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Membership Details">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                            <children>
+                                <VBox styleClass="card" spacing="20.0">
+                                    <children>
+                                        <Label text="My Membership Information" styleClass="title" />
+                                        <GridPane hgap="20.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Member ID:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <Label fx:id="memberIdLabel" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                                <Label text="Name:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <Label fx:id="memberNameLabel" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Membership Type:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <Label fx:id="membershipTypeLabel" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                                <Label text="Start Date:" styleClass="label-header" GridPane.rowIndex="3" />
+                                                <Label fx:id="startDateLabel" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                                                <Label text="End Date:" styleClass="label-header" GridPane.rowIndex="4" />
+                                                <Label fx:id="endDateLabel" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                                                <Label text="Status:" styleClass="label-header" GridPane.rowIndex="5" />
+                                                <Label fx:id="membershipStatusLabel" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="150.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+
+                                <VBox styleClass="card" spacing="15.0">
+                                    <children>
+                                        <Label text="Membership Benefits" styleClass="label-header" />
+                                        <TextArea fx:id="benefitsTextArea" editable="false" prefHeight="100.0" prefWidth="400.0" styleClass="text-field" wrapText="true" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Book Classes">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                            <children>
+                                <VBox styleClass="card" spacing="20.0">
+                                    <children>
+                                        <Label text="Book Fitness Classes" styleClass="title" />
+                                        <GridPane hgap="20.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Class Name:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <ComboBox fx:id="classNameCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                                <Label text="Class Date:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <DatePicker fx:id="classDatePicker" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Class Time:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="classTimeCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="120.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                        <Button fx:id="bookClassButton" onAction="#handleBookClass" styleClass="accent-button" text="Book Class" />
+                                        <Label fx:id="bookingMessageLabel" styleClass="subtitle" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="My Bookings">
+                    <content>
+                        <VBox spacing="15.0" style="-fx-padding: 25;">
+                            <children>
+                                <Label text="My Class Bookings" styleClass="title" />
+                                <TableView fx:id="bookingsTableView" prefHeight="400.0" prefWidth="750.0">
+                                    <columns>
+                                        <TableColumn fx:id="bookingIdColumn" prefWidth="75.0" text="Booking ID" />
+                                        <TableColumn fx:id="classNameColumn" prefWidth="150.0" text="Class Name" />
+                                        <TableColumn fx:id="classTimeColumn" prefWidth="150.0" text="Class Time" />
+                                        <TableColumn fx:id="bookingTimeColumn" prefWidth="150.0" text="Booking Time" />
+                                        <TableColumn fx:id="bookingStatusColumn" prefWidth="100.0" text="Status" />
+                                        <TableColumn fx:id="bookingActionsColumn" prefWidth="100.0" text="Actions" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="refreshBookingsButton" onAction="#handleRefreshBookings" styleClass="button" text="Refresh" />
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Payment History">
+                    <content>
+                        <VBox spacing="15.0" style="-fx-padding: 25;">
+                            <children>
+                                <Label text="My Payment History" styleClass="title" />
+                                <TableView fx:id="paymentsTableView" prefHeight="400.0" prefWidth="750.0">
+                                    <columns>
+                                        <TableColumn fx:id="paymentIdColumn" prefWidth="75.0" text="Payment ID" />
+                                        <TableColumn fx:id="paymentAmountColumn" prefWidth="100.0" text="Amount" />
+                                        <TableColumn fx:id="paymentDateColumn" prefWidth="150.0" text="Date" />
+                                        <TableColumn fx:id="paymentTypeColumn" prefWidth="150.0" text="Type" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="refreshPaymentsButton" onAction="#handleRefreshPayments" styleClass="button" text="Refresh" />
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>
