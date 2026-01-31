@@ -234,6 +234,15 @@ public class MemberDAOImpl implements MemberDAO{
 
         return member;
 
+        private Membership createMembershipFromType(String type) {
+            return switch (type) {
+                case "MonthlyMembership" -> new MonthlyMembership();
+                case "AnnualMembership" -> new AnnualMembership();
+                case "VIPMembership" -> new VIPMembership();
+                default -> new MonthlyMembership();
+            };
+        }
+
     }
 
 }
