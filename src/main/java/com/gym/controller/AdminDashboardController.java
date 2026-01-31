@@ -118,8 +118,6 @@ public class AdminDashboardController {
     @FXML
     private Label reportNetFlowLabel;
 
-    private Label reportNetFlowLabel;
-
     private User currentUser;
     private final PaymentDAO paymentDAO = new PaymentDAOImpl();
     private final ExpenseDAO expenseDAO = new ExpenseDAOImpl();
