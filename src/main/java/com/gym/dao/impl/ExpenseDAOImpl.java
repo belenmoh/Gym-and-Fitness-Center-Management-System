@@ -151,4 +151,23 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         return expenses;
     }
 
+    @Override
+    public double getTotalExpensesByMonth(int month, int year) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_TOTAL_EXPENSES_BY_MONTH_SQL)) {
+
+            // Format as YYYY-MM pattern to match datetime format
+            String datePattern = String.format("%04d-%02d", year, month);
+            stmt.setString(1, datePattern);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error getting total expenses by month", e);
+        }
+        return 0.0;
+    }
+
 }
