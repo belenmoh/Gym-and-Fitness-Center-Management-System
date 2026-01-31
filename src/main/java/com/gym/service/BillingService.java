@@ -96,4 +96,19 @@ public class BillingService {
                 .mapToDouble(Payment::getAmount)
                 .sum();
     }
+
+    public double calculateMembershipFee(Membership membership) {
+        return membershipService.calculateMembershipPrice(membership);
+    }
+
+    public boolean processMembershipRenewal(int memberId, Membership newMembership) {
+        try {
+            double fee = calculateMembershipFee(newMembership);
+            recordMembershipPayment(memberId, fee);
+            membershipService.renewMembership(memberId, newMembership);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
