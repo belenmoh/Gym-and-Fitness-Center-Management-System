@@ -56,4 +56,14 @@ public class Member extends User{
     public boolean isMembershipActive() {
         return endDate != null && endDate.isAfter(LocalDate.now());
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberId=" + memberId +
+                ", membership=" + membership +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                "} " + super.toString();
+    }
 }
