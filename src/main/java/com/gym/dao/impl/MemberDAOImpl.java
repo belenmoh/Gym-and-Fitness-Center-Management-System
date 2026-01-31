@@ -98,4 +98,20 @@ public class MemberDAOImpl implements MemberDAO{
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<Member> findAll() {
+        List<Member> members = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                members.add(mapResultSetToMember(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all members", e);
+        }
+        return members;
+    }
 }
