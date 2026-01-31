@@ -20,4 +20,13 @@ public class MembershipService {
         this.memberDAO = memberDAO;
         this.userDAO = userDAO;
     }
+
+    public Member registerMember(Member member) {
+        if (userDAO.existsByUsername(member.getUsername())) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+
+        userDAO.save(member);
+        return memberDAO.save(member);
+    }
 }
