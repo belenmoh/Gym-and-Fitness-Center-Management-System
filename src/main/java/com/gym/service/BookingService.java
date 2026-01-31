@@ -92,4 +92,15 @@ public class BookingService {
                     return !bookingTime.isBefore(startTime) && !bookingTime.isAfter(endTime);
                 });
     }
+
+    public void markNoShow(int bookingId) {
+        Optional<Booking> bookingOpt = bookingDAO.findById(bookingId);
+        if (bookingOpt.isEmpty()) {
+            throw new IllegalArgumentException("Booking not found");
+        }
+
+        Booking booking = bookingOpt.get();
+        booking.setStatus(BookingStatus.NO_SHOW);
+        bookingDAO.update(booking);
+    }
 }
