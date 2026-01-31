@@ -17,4 +17,10 @@ public class FinancialService {
         this.paymentDAO = paymentDAO;
         this.expenseDAO = expenseDAO;
     }
+
+    public double getTotalIncome() {
+        return paymentDAO.findAll().stream()
+                .mapToDouble(Payment::getAmount)
+                .sum();
+    }
 }
