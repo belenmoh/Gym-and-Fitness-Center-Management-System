@@ -76,4 +76,19 @@ public class FinancialService {
         return expenseDAO.findByMonth(month, year);
     }
 
+    public double getAverageMonthlyIncome(int year) {
+        double totalYearlyIncome = 0;
+        for (int month = 1; month <= 12; month++) {
+            totalYearlyIncome += getTotalIncomeByMonth(month, year);
+        }
+        return totalYearlyIncome / 12;
+    }
+
+    public double getAverageMonthlyExpenses(int year) {
+        double totalYearlyExpenses = 0;
+        for (int month = 1; month <= 12; month++) {
+            totalYearlyExpenses += getTotalExpensesByMonth(month, year);
+        }
+        return totalYearlyExpenses / 12;
+    }
 }
