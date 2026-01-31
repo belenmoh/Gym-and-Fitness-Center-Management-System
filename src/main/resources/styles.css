@@ -100,3 +100,101 @@
     -fx-padding: 8 25 8 25;       /* Increases internal horizontal spacing */
     -fx-background-insets: 0 5 5 0; /* Creates external visual gap to the right */
 }
+.admin-tabpane .tab:hover .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(one-pass-box, white, 5, 0, 0, 0);
+}
+.admin-tabpane .tab:pressed {
+    -fx-background-color: rgb(49, 0, 41);
+    -fx-translate-y: 2px;
+}
+
+.admin-tabpane .tab-pane {
+    -fx-tab-gap: 10px;
+}
+
+.admin-tabpane .tab:selected {
+    -fx-background-color: rgba(49, 0, 41, 1); /* Darker than your original 50, 60, 100 */
+    -fx-background-insets: 0 5 0 0, 0;            /* Keeps your spacing gap but resets internal layers */
+}
+.admin-tabpane .tab:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.admin-tabpane .tab:focused .tab-container {
+    -fx-background-color: transparent;
+}
+
+.admin-tabpane .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+.admin-refresh-button{
+    -fx-background-color: #C0392B;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-margin: 10 5 10 5;
+}
+.admin-refresh-button:hover {
+    -fx-background-color: #E74C3C;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.4), 15, 0, 0, 0);
+}
+.admin-refresh-button:pressed {
+    -fx-background-color: #922B21;
+    -fx-translate-y: 2px;
+}
+
+.profit-status {
+    -fx-text-fill: #27AE60; /* Green for profit */
+    -fx-font-weight: bold;
+}
+
+.loss-status {
+    -fx-text-fill: #E74C3C; /* Red for loss */
+    -fx-font-weight: bold;
+}
+
+.neutral-status {
+    -fx-text-fill: #F39C12; /* Orange for neutral */
+    -fx-font-weight: bold;
+}
+
+.suggestion-text {
+    -fx-text-fill: #ECF0F1;
+    -fx-background-color: rgba(52, 73, 94, 0.3);
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+}
+
+.payments-table {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 5);
+}
+
+.payments-table .column-header-background {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 1 1 0;
+}
+
+.payments-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 12 15;
+}
+
+.payments-table .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
