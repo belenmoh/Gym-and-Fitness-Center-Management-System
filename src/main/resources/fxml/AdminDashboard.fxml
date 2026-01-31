@@ -4,3 +4,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<BorderPane>
+    <top>
+        <VBox>
+            <children>
+                <Label>
+
+                </Label>
+                <HBox>
+
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <TabPane>
+            <tabs>
+                <Tab text="Register Member">
+                    <content>
+                        <VBox>
+                            <children>
+                                <Label>
+
+                                </Label>
+                                <GridPane>
+                                    <children>
+
+                                    </children>
+                                    <colunmConstraints>
+
+                                    </colunmConstraints>
+                                </GridPane>
+                                <Button/>
+                                <Label/>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Renew Membership">
+                    <content>
+
+                    </content>
+                </Tab>
+                <Tab text="Record Payment">
+
+                </Tab>
+                <Tab text="View Members">
+
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
