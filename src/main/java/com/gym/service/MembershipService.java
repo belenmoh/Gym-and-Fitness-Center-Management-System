@@ -13,4 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class MembershipService {
+    private final MemberDAO memberDAO;
+    private final UserDAO userDAO;
+
+    public MembershipService(MemberDAO memberDAO, UserDAO userDAO) {
+        this.memberDAO = memberDAO;
+        this.userDAO = userDAO;
+    }
 }
