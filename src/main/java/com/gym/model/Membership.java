@@ -50,4 +50,13 @@ public abstract class Membership {
     public abstract double calculateDiscount();
 
     public abstract String getBenefits();
+    @Override
+    public String toString() {
+        return "Membership{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", durationMonths=" + durationMonths +
+                '}';
+    }
 }
