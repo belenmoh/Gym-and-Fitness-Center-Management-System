@@ -133,4 +133,9 @@ public class FinancialService {
         }
         return minIncome == Double.MAX_VALUE ? 0 : minIncome;
     }
+
+    public FinancialReport getCurrentMonthReport() {
+        LocalDate now = LocalDate.now();
+        return getMonthlyReport(now.getMonthValue(), now.getYear());
+    }
 }
