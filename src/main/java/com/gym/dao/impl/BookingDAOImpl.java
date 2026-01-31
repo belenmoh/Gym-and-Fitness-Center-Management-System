@@ -203,4 +203,26 @@ public class BookingDAOImpl implements BookingDAO {
             throw new RuntimeException("Error deleting booking", e);
         }
     }
+
+    private Booking mapResultSetToBooking(ResultSet rs) throws SQLException {
+        Booking booking = new Booking();
+        booking.setId(rs.getInt("id"));
+        booking.setMemberId(rs.getInt("member_id"));
+        booking.setClassName(rs.getString("class_name"));
+
+        String bookingTimeStr = rs.getString("booking_time");
+        if (bookingTimeStr != null) {
+            booking.setBookingTime(LocalDateTime.parse(bookingTimeStr, DATE_TIME_FORMATTER));
+        }
+
+        String classTimeStr = rs.getString("class_time");
+        if (classTimeStr != null) {
+            booking.setClassTime(LocalDateTime.parse(classTimeStr, DATE_TIME_FORMATTER));
+        }
+
+        String statusStr = rs.getString("status");
+        booking.setStatus(BookingStatus.valueOf(statusStr));
+
+        return booking;
+    }
 }
