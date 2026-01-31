@@ -94,4 +94,11 @@ public class DatabaseUtil {
             throw new RuntimeException("Failed to initialize database", e);
         }
     }
+
+    public static Connection getConnection() throws SQLException {
+        if (!initialized) {
+            initializeDatabase();
+        }
+        return DriverManager.getConnection(DB_URL);
+    }
 }
