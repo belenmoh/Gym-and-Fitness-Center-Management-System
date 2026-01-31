@@ -183,4 +183,34 @@ public class MemberDAOImpl implements MemberDAO{
             throw new RuntimeException("Error deleting member", e);
         }
     }
+
+    private Member mapResultSetToMember(ResultSet rs) throws SQLException {
+        Member member = new Member();
+        member.setId(rs.getInt("user_id"));
+        member.setMemberId(rs.getInt("id"));
+        member.setName(rs.getString("name"));
+        member.setUsername(rs.getString("username"));
+        member.setPassword(rs.getString("password"));
+
+        try {
+            Date startDate = rs.getDate("start_date");
+            if (startDate != null) {
+                member.setStartDate(startDate.toLocalDate());
+            }
+        } catch (Exception e) {
+            // If date parsing fails, try to parse as timestamp
+            try {
+                long timestamp = rs.getLong("start_date");
+                if (!rs.wasNull()) {
+                    member.setStartDate(new java.util.Date(timestamp).toInstant()
+                            .atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+                }
+            } catch (Exception ex) {
+                member.setStartDate(null);
+            }
+        }
+
+
+    }
+
 }
