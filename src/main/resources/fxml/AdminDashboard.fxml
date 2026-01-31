@@ -125,7 +125,29 @@
                     </content>
                 </Tab>
                 <Tab text="View Members">
-
+                    <content>
+                        <VBox spacing="15.0" style="-fx-padding: 25;">
+                            <children>
+                                <Label text="All Members" styleClass="title" />
+                                <TableView fx:id="membersTableView" prefHeight="350.0" prefWidth="750.0">
+                                    <columns>
+                                        <TableColumn fx:id="memberIdColumn" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="memberNameColumn" prefWidth="150.0" text="Name" />
+                                        <TableColumn fx:id="memberUsernameColumn" prefWidth="150.0" text="Username" />
+                                        <TableColumn fx:id="memberMembershipColumn" prefWidth="150.0" text="Membership" />
+                                        <TableColumn fx:id="memberEndDateColumn" prefWidth="150.0" text="End Date" />
+                                    </columns>
+                                </TableView>
+                                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Button fx:id="refreshMembersButton" onAction="#handleRefreshMembers" styleClass="button" text="Refresh" />
+                                        <Button fx:id="cancelMembershipButton" onAction="#handleCancelMembership" styleClass="button" text="Cancel Membership" style="-fx-background-color: #e74c3c;" />
+                                        <Label fx:id="cancelMembershipMessageLabel" styleClass="subtitle" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </content>
                 </Tab>
             </tabs>
         </TabPane>
