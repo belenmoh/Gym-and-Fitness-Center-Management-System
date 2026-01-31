@@ -94,7 +94,35 @@
                     </content>
                 </Tab>
                 <Tab text="Record Payment">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
+                            <children>
+                                <VBox styleClass="card" spacing="20.0">
+                                    <children>
+                                        <Label text="Record Payment" styleClass="title" />
+                                        <GridPane hgap="20.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Member ID:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <TextField fx:id="paymentMemberIdField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
+                                                <Label text="Amount:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <TextField fx:id="paymentAmountField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Payment Type:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="paymentTypeCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints prefWidth="120.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </columnConstraints>
+                                        </GridPane>
+                                        <Button fx:id="recordPaymentButton" onAction="#handleRecordPayment" styleClass="highlight-button" text="Record Payment" />
+                                        <Label fx:id="paymentMessageLabel" styleClass="subtitle" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
                 </Tab>
                 <Tab text="View Members">
 
