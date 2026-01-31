@@ -76,5 +76,12 @@ public class GymApplication extends Application{
             System.err.println("Error creating default users: " + e.getMessage());
         }
     }
+    @Override
+    public void stop() {
+        System.out.println("Application shutting down...");
+    }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
