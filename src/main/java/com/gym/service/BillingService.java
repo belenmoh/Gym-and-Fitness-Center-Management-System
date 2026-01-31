@@ -111,4 +111,25 @@ public class BillingService {
             return false;
         }
     }
+
+    public List<Payment> getAllPayments() {
+        return paymentDAO.findAll();
+    }
+
+    public boolean updatePayment(Payment payment) {
+        try {
+            paymentDAO.update(payment);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean deletePayment(int paymentId) {
+        try {
+            return paymentDAO.delete(paymentId);
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
