@@ -79,4 +79,20 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return Optional.empty();
     }
+
+    @Override
+    public List<Booking> findAll() {
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL_SQL);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                bookings.add(mapResultSetToBooking(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding all bookings", e);
+        }
+        return bookings;
+    }
 }
