@@ -95,4 +95,22 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return bookings;
     }
+
+    @Override
+    public List<Booking> findByMemberId(int memberId) {
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_MEMBER_ID_SQL)) {
+
+            stmt.setInt(1, memberId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bookings.add(mapResultSetToBooking(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding bookings by member id", e);
+        }
+        return bookings;
+    }
 }
