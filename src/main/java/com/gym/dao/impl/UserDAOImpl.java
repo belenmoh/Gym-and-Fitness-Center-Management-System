@@ -56,4 +56,21 @@ public class UserDAOImpl implements UserDAO{
         }
         return user;
     }
+
+    @Override
+    public Optional<User> findById(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return Optional.of(mapResultSetToUser(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding user by id", e);
+        }
+        return Optional.empty();
+    }
 }
