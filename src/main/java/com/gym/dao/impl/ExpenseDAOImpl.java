@@ -132,4 +132,23 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         return expenses;
     }
 
+    @Override
+    public List<Expense> findByMonth(int month, int year) {
+        List<Expense> expenses = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_MONTH_SQL)) {
+
+            stmt.setString(1, String.format("%02d", month));
+            stmt.setString(2, String.valueOf(year));
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                expenses.add(mapResultSetToExpense(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding expenses by month", e);
+        }
+        return expenses;
+    }
+
 }
