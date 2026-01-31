@@ -29,4 +29,20 @@ public class MembershipService {
         userDAO.save(member);
         return memberDAO.save(member);
     }
+
+    public Member renewMembership(int memberId, Membership newMembership) {
+        Optional<Member> memberOpt = memberDAO.findById(memberId);
+        if (memberOpt.isEmpty()) {
+            throw new IllegalArgumentException("Member not found");
+        }
+
+        Member member = memberOpt.get();
+        LocalDate endDate = LocalDate.now().plusMonths(newMembership.getDurationMonths());
+
+        member.setMembership(newMembership);
+        member.setStartDate(LocalDate.now());
+        member.setEndDate(endDate);
+
+        return memberDAO.update(member);
+    }
 }
