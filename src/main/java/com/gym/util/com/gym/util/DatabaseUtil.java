@@ -77,4 +77,21 @@ public class DatabaseUtil {
         """;
         stmt.execute(sql);
     }
+
+    private static void initializeDatabase() {
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement()) {
+
+            createUsersTable(stmt);
+            createMembersTable(stmt);
+            createPaymentsTable(stmt);
+            createExpensesTable(stmt);
+            createBookingsTable(stmt);
+
+            initialized = true;
+            System.out.println("Database initialized successfully");
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to initialize database", e);
+        }
+    }
 }
