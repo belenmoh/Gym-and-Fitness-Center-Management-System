@@ -151,4 +151,23 @@ public class MemberDAOImpl implements MemberDAO{
         return members;
     }
 
+    @Override
+    public Member update(Member member) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(UPDATE_SQL)) {
+
+            stmt.setString(1, member.getMembership().getClass().getSimpleName());
+            stmt.setDate(2, Date.valueOf(member.getStartDate()));
+            stmt.setDate(3, Date.valueOf(member.getEndDate()));
+            stmt.setInt(4, member.getMemberId());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Updating member failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating member", e);
+        }
+        return member;
+    }
 }
