@@ -61,4 +61,9 @@ public class MembershipService {
     public List<Member> getMembersByMembershipType(String membershipType) {
         return memberDAO.findByMembershipType(membershipType);
     }
+
+    public boolean isMembershipActive(int memberId) {
+        Optional<Member> memberOpt = memberDAO.findById(memberId);
+        return memberOpt.map(Member::isMembershipActive).orElse(false);
+    }
 }
