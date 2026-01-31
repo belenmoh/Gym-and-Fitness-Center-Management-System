@@ -103,4 +103,15 @@ public class BookingService {
         booking.setStatus(BookingStatus.NO_SHOW);
         bookingDAO.update(booking);
     }
+
+    public void markCompleted(int bookingId) {
+        Optional<Booking> bookingOpt = bookingDAO.findById(bookingId);
+        if (bookingOpt.isEmpty()) {
+            throw new IllegalArgumentException("Booking not found");
+        }
+
+        Booking booking = bookingOpt.get();
+        booking.setStatus(BookingStatus.COMPLETED);
+        bookingDAO.update(booking);
+    }
 }
