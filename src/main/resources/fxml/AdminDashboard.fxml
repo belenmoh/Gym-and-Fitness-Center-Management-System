@@ -23,25 +23,41 @@
         </VBox>
     </top>
     <center>
-        <TabPane>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Register Member">
                     <content>
-                        <VBox>
+                        <VBox spacing="20.0" style="-fx-padding: 25;">
                             <children>
-                                <Label>
-
-                                </Label>
-                                <GridPane>
+                                <VBox styleClass="card" spacing="20.0">
                                     <children>
+                                        <Label text="Register New Member" styleClass="title"/>
+                                        <GridPane hgap="20.0" vgap="15.0">
+                                            <children>
+                                                <Label text="Name:" styleClass="label-header" GridPane.rowIndex="0" />
+                                                <TextField fx:id="memberNameField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
+                                                <Label text="Username:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <TextField fx:id="memberUsernameField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                                <Label text="Password:" styleClass="label-header" GridPane.rowIndex="2" />
+                                                <PasswordField fx:id="memberPasswordField" styleClass="password-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                                <Label text="Membership Type:" styleClass="label-header" GridPane.rowIndex="3" />
+                                                <ComboBox fx:id="membershipTypeCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                                                <Label text="Price:" styleClass="label-header" GridPane.rowIndex="4" />
+                                                <Label fx:id="membershipPriceLabel" styleClass="price-display" text="ETB 0.00" GridPane.columnIndex="1" GridPane.rowIndex="4" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2196F3;" />
+                                            </children>
+                                            <colunmConstraints>
+                                                <ColumnConstraints prefWidth="120.0" />
+                                                <ColumnConstraints prefWidth="200.0" />
+                                            </colunmConstraints>
+                                        </GridPane>
+                                        <Button fx:id="registerMemberButton" onAction="#handleRegisterMember" styleClass="highlight-button" text="Register Member" />
+                                        <Label fx:id="registerMessageLabel" styleClass="subtitle" />
                                     </children>
-                                    <colunmConstraints>
-
-                                    </colunmConstraints>
-                                </GridPane>
-                                <Button/>
-                                <Label/>
+                                </VBox>
                             </children>
                         </VBox>
                     </content>
