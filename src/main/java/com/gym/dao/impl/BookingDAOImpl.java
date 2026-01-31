@@ -149,4 +149,23 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return bookings;
     }
+
+    @Override
+    public List<Booking> findByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+        List<Booking> bookings = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_DATE_RANGE_SQL)) {
+
+            stmt.setString(1, startDate.format(DATE_TIME_FORMATTER));
+            stmt.setString(2, endDate.format(DATE_TIME_FORMATTER));
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                bookings.add(mapResultSetToBooking(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding bookings by date range", e);
+        }
+        return bookings;
+    }
 }
