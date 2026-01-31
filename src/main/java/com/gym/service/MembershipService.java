@@ -66,4 +66,13 @@ public class MembershipService {
         Optional<Member> memberOpt = memberDAO.findById(memberId);
         return memberOpt.map(Member::isMembershipActive).orElse(false);
     }
+
+    public Membership createMembership(String type, double price) {
+        return switch (type.toLowerCase()) {
+            case "monthly" -> new MonthlyMembership(0, "Monthly Membership", price);
+            case "annual" -> new AnnualMembership(0, "Annual Membership", price);
+            case "vip" -> new VIPMembership(0, "VIP Membership", price);
+            default -> throw new IllegalArgumentException("Invalid membership type: " + type);
+        };
+    }
 }
