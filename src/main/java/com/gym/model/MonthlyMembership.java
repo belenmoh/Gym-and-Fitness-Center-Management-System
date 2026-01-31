@@ -1,4 +1,4 @@
 package com.gym.model;
 
-public class MonthlyMembership {
+public class MonthlyMembership extends Membership{
 }

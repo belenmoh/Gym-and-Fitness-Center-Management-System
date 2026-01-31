@@ -1,4 +1,4 @@
 package com.gym.model;
 
-public class Membership {
+public abstract class Membership {
 }

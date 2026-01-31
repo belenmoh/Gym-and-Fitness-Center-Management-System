@@ -1,4 +1,4 @@
 package com.gym.model;
 
-public class VIPMembership {
+public class VIPMembership extends Membership{
 }

@@ -1,4 +1,4 @@
 package com.gym.model;
 
-public class Admin {
+public class Admin extends User{
 }
