@@ -10,4 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookingService {
+    private final BookingDAO bookingDAO;
+    private final MemberDAO memberDAO;
+
+    public BookingService(BookingDAO bookingDAO, MemberDAO memberDAO) {
+        this.bookingDAO = bookingDAO;
+        this.memberDAO = memberDAO;
+    }
 }
