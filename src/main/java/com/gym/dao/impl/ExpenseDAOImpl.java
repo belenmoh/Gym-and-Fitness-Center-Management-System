@@ -204,4 +204,35 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         }
     }
 
+    private Expense mapResultSetToExpense(ResultSet rs) throws SQLException {
+        Expense expense = new Expense();
+        expense.setId(rs.getInt("id"));
+        expense.setDescription(rs.getString("description"));
+        expense.setAmount(rs.getDouble("amount"));
+
+        // Handle date parsing with timestamp conversion
+        try {
+            Date date = rs.getDate("date");
+            if (date != null) {
+                expense.setDate(date.toLocalDate());
+            }
+        } catch (Exception e) {
+            // If date parsing fails, try to parse as timestamp
+            try {
+                long timestamp = rs.getLong("date");
+                if (!rs.wasNull()) {
+                    expense.setDate(new java.util.Date(timestamp).toInstant()
+                            .atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+                }
+            } catch (Exception ex) {
+                expense.setDate(null);
+            }
+        }
+
+        String categoryStr = rs.getString("category");
+        expense.setCategory(ExpenseCategory.valueOf(categoryStr));
+
+        return expense;
+    }
+
 }
