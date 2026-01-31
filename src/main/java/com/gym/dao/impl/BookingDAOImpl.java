@@ -62,4 +62,21 @@ public class BookingDAOImpl implements BookingDAO {
         }
         return booking;
     }
+
+    @Override
+    public Optional<Booking> findById(int id) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID_SQL)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return Optional.of(mapResultSetToBooking(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding booking by id", e);
+        }
+        return Optional.empty();
+    }
 }
