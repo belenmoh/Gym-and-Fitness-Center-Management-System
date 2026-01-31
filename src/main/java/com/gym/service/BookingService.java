@@ -55,4 +55,28 @@ public class BookingService {
         booking.setStatus(BookingStatus.CANCELLED);
         return bookingDAO.update(booking);
     }
+
+    public Optional<Booking> findBookingById(int id) {
+        return bookingDAO.findById(id);
+    }
+
+    public List<Booking> getBookingsByMember(int memberId) {
+        return bookingDAO.findByMemberId(memberId);
+    }
+
+    public List<Booking> getBookingsByClass(String className) {
+        return bookingDAO.findByClassName(className);
+    }
+
+    public List<Booking> getBookingsByStatus(BookingStatus status) {
+        return bookingDAO.findByStatus(status);
+    }
+
+    public List<Booking> getBookingsByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
+        return bookingDAO.findByDateRange(startDate, endDate);
+    }
+
+    public List<Booking> getAllBookings() {
+        return bookingDAO.findAll();
+    }
 }
