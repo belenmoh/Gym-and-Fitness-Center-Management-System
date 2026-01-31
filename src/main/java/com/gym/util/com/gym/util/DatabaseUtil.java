@@ -62,4 +62,19 @@ public class DatabaseUtil {
         """;
         stmt.execute(sql);
     }
+
+    private static void createBookingsTable(Statement stmt) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS bookings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                member_id INTEGER NOT NULL,
+                class_name TEXT NOT NULL,
+                booking_time TEXT NOT NULL,
+                class_time TEXT NOT NULL,
+                status TEXT NOT NULL CHECK (status IN ('BOOKED', 'CANCELLED', 'COMPLETED', 'NO_SHOW')),
+                FOREIGN KEY (member_id) REFERENCES members (id) ON DELETE CASCADE
+            )
+        """;
+        stmt.execute(sql);
+    }
 }
