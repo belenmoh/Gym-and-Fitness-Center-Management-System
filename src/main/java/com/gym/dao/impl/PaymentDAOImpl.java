@@ -223,6 +223,37 @@ public class PaymentDAOImpl implements PaymentDAO{
             throw new RuntimeException("Error deleting payment", e);
         }
     }
+
+    private Payment mapResultSetToPayment(ResultSet rs) throws SQLException {
+        Payment payment = new Payment();
+        payment.setId(rs.getInt("id"));
+        payment.setMemberId(rs.getInt("member_id"));
+        payment.setAmount(rs.getDouble("amount"));
+
+        // Handle date parsing with timestamp conversion
+        try {
+            Date date = rs.getDate("date");
+            if (date != null) {
+                payment.setDate(date.toLocalDate());
+            }
+        } catch (Exception e) {
+            // If date parsing fails, try to parse as timestamp
+            try {
+                long timestamp = rs.getLong("date");
+                if (!rs.wasNull()) {
+                    payment.setDate(new java.util.Date(timestamp).toInstant()
+                            .atZone(java.time.ZoneId.systemDefault()).toLocalDate());
+                }
+            } catch (Exception ex) {
+                payment.setDate(null);
+            }
+        }
+
+        String typeStr = rs.getString("type");
+        payment.setType(PaymentType.valueOf(typeStr));
+
+        return payment;
+    }
 }
 
 
