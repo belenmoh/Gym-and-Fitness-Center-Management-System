@@ -12,4 +12,19 @@ public class Admin extends User{
         super(id, name, username, password, UserRole.ADMIN);
         this.adminId = adminId;
     }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "adminId=" + adminId +
+                "} " + super.toString();
+    }
 }
