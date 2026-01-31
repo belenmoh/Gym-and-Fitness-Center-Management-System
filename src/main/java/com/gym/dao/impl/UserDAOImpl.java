@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl implements UserDAO {
     private static final String INSERT_SQL =
             "INSERT INTO users (name, username, password, role) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL =
@@ -195,4 +195,5 @@ public class UserDAOImpl implements UserDAO{
                 yield admin;
             }
         };
+    }
 }
