@@ -246,8 +246,8 @@
 .expenses-table .virtual-flow {
     -fx-background-color: transparent;
 }
+
 /* Exenses table*/
-/* Specific Class for the Expenses Table */
 .expenses-table {
     -fx-background-color: rgba(69, 11, 11, 0.35);
     -fx-fixed-cell-size: 35px;
@@ -273,7 +273,7 @@
     -fx-alignment: CENTER;
 }
 
-/* Cell styling */
+/*cell styling*/
 .expenses-table .table-cell {
     -fx-alignment: CENTER;
     -fx-padding: 10;
@@ -295,3 +295,96 @@
 .expenses-table .table-row-cell:selected {
     -fx-background-color: rgba(49, 0, 41, 0.9); /* Selected Dark Purple */
 }
+.expenses-table .filler {
+    -fx-background-color: transparent;
+}
+.text-field, .password-field {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #99A3A4;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: #E6B0AA;
+}
+
+.button {
+    -fx-background-color: #C0392B;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-margin: 10 5 10 5;
+}
+
+.button:hover {
+    -fx-background-color: #E74C3C;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.4), 15, 0, 0, 0);
+}
+
+.button:pressed {
+    -fx-background-color: #922B21;
+    -fx-translate-y: 2px;
+}
+
+.expenses-card {
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(69, 11, 11, 0.35); /* Deep Wine Tint */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 20, 0, 0, 10);
+    -fx-border-color: rgba(255, 184, 184, 0.15);
+    -fx-border-radius: 20;
+    -fx-border-width: 1.5;
+    -fx-padding: 25;
+    -fx-min-height: -preferred;
+    -fx-max-width: 500;
+}
+
+.expenses-card .date-picker,
+.expenses-card .combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.expenses-card .combo-box .list-cell {
+    -fx-text-fill: white !important;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 5;
+}
+
+.expenses-card .combo-box .arrow-button,
+.expenses-card .date-picker .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.expenses-card .combo-box .arrow,
+.expenses-card .date-picker .arrow {
+    -fx-background-color: #FADBD8; /* Light Pink Arrow */
+}
+
+.expenses-card .combo-box-base .list-view {
+    -fx-background-color: #2D2D2D; /* Dark Background */
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.expenses-card .combo-box-base .list-view .list-cell {
+    -fx-text-fill: white !important; /* Force text white on dark bg */
+    -fx-background-color: transparent;
+    -fx-padding: 8 10;
+}
+
+.expenses-card .combo-box-base .list-view .list-cell:hover,
+.expenses-card .combo-box-base .list-view .list-cell:filled:selected {
+    -fx-background-color: rgba(62, 33, 57, 0.9); /* Midnight Plum */
+    -fx-text-fill: white !important;
+}
+
+.member-theme { -fx-background-color: transparent; }
