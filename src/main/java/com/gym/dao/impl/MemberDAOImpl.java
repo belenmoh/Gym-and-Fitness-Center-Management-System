@@ -114,4 +114,22 @@ public class MemberDAOImpl implements MemberDAO{
         }
         return members;
     }
+
+    @Override
+    public List<Member> findByMembershipType(String membershipType) {
+        List<Member> members = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_MEMBERSHIP_TYPE_SQL)) {
+
+            stmt.setString(1, membershipType);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                members.add(mapResultSetToMember(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding members by membership type", e);
+        }
+        return members;
+    }
 }
