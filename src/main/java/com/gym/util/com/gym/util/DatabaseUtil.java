@@ -101,4 +101,14 @@ public class DatabaseUtil {
         }
         return DriverManager.getConnection(DB_URL);
     }
+
+    public static void closeConnection(Connection conn) {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing connection: " + e.getMessage());
+            }
+        }
+    }
 }
