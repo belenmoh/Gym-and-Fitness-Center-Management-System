@@ -79,4 +79,17 @@ public class BookingService {
     public List<Booking> getAllBookings() {
         return bookingDAO.findAll();
     }
+
+    public boolean hasConflictingBooking(int memberId, LocalDateTime classTime) {
+        List<Booking> memberBookings = bookingDAO.findByMemberId(memberId);
+        LocalDateTime startTime = classTime.minusHours(1);
+        LocalDateTime endTime = classTime.plusHours(1);
+
+        return memberBookings.stream()
+                .filter(booking -> booking.getStatus() == BookingStatus.BOOKED)
+                .anyMatch(booking -> {
+                    LocalDateTime bookingTime = booking.getClassTime();
+                    return !bookingTime.isBefore(startTime) && !bookingTime.isAfter(endTime);
+                });
+    }
 }
