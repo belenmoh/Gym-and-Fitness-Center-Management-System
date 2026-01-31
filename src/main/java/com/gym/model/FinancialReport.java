@@ -55,4 +55,15 @@ public class FinancialReport {
         return netCashFlow;
     }
 
+    @Override
+    public String toString() {
+        return "FinancialReport{" +
+                "month=" + month +
+                ", year=" + year +
+                ", totalIncome=" + totalIncome +
+                ", totalExpenses=" + totalExpenses +
+                ", netCashFlow=" + netCashFlow +
+                '}';
+    }
+
 }
