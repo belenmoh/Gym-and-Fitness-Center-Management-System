@@ -36,4 +36,32 @@ public class MemberDAOImpl implements MemberDAO{
             "UPDATE members SET membership_type = ?, start_date = ?, end_date = ? WHERE id = ?";
     private static final String DELETE_SQL =
             "DELETE FROM members WHERE id = ?";
+
+    @Override
+    public Member save(Member member) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setInt(1, member.getId());
+            stmt.setString(2, member.getMembership().getClass().getSimpleName());
+            stmt.setDate(3, Date.valueOf(member.getStartDate()));
+            stmt.setDate(4, Date.valueOf(member.getEndDate()));
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating member failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    member.setMemberId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating member failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving member", e);
+        }
+        return member;
+    }
 }
