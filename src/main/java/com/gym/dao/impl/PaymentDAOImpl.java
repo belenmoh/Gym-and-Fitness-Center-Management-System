@@ -134,6 +134,23 @@ public class PaymentDAOImpl implements PaymentDAO{
         return payments;
     }
 
+    @Override
+    public List<Payment> findByType(PaymentType type) {
+        List<Payment> payments = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_TYPE_SQL)) {
+
+            stmt.setString(1, type.name());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                payments.add(mapResultSetToPayment(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding payments by type", e);
+        }
+        return payments;
+    }
 }
 
 
