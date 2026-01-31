@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MemberDAOImpl implements MemberDAO{
+public class MemberDAOImpl implements MemberDAO {
+
     private static final String INSERT_SQL =
             "INSERT INTO members (user_id, membership_type, start_date, end_date) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL =
@@ -192,6 +193,7 @@ public class MemberDAOImpl implements MemberDAO{
         member.setUsername(rs.getString("username"));
         member.setPassword(rs.getString("password"));
 
+        // Handle date parsing with timestamp conversion
         try {
             Date startDate = rs.getDate("start_date");
             if (startDate != null) {
@@ -233,16 +235,14 @@ public class MemberDAOImpl implements MemberDAO{
         member.setMembership(membership);
 
         return member;
-
-        private Membership createMembershipFromType(String type) {
-            return switch (type) {
-                case "MonthlyMembership" -> new MonthlyMembership();
-                case "AnnualMembership" -> new AnnualMembership();
-                case "VIPMembership" -> new VIPMembership();
-                default -> new MonthlyMembership();
-            };
-        }
-
     }
 
+    private Membership createMembershipFromType(String type) {
+        return switch (type) {
+            case "MonthlyMembership" -> new MonthlyMembership();
+            case "AnnualMembership" -> new AnnualMembership();
+            case "VIPMembership" -> new VIPMembership();
+            default -> new MonthlyMembership();
+        };
+    }
 }
