@@ -31,4 +31,31 @@ public class ExpenseDAOImpl implements ExpenseDAO{
     private static final String DELETE_SQL =
             "DELETE FROM expenses WHERE id = ?";
 
+    @Override
+    public Expense save(Expense expense) {
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, expense.getDescription());
+            stmt.setDouble(2, expense.getAmount());
+            stmt.setDate(3, Date.valueOf(expense.getDate()));
+            stmt.setString(4, expense.getCategory().name());
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating expense failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    expense.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating expense failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error saving expense", e);
+        }
+        return expense;
+    }
 }
