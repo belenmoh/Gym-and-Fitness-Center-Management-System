@@ -59,4 +59,21 @@ public class FinancialService {
         }
         return reports;
     }
+
+    public List<Payment> getPaymentsByDateRange(LocalDate startDate, LocalDate endDate) {
+        return paymentDAO.findByDateRange(startDate, endDate);
+    }
+
+    public List<Expense> getExpensesByDateRange(LocalDate startDate, LocalDate endDate) {
+        return expenseDAO.findByDateRange(startDate, endDate);
+    }
+
+    public List<Payment> getPaymentsByMonth(int month, int year) {
+        return paymentDAO.findByMonth(month, year);
+    }
+
+    public List<Expense> getExpensesByMonth(int month, int year) {
+        return expenseDAO.findByMonth(month, year);
+    }
+
 }
