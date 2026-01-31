@@ -91,4 +91,28 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         }
         return expenses;
     }
+    @Override
+    public List<Expense> findByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<Expense> expenses = new ArrayList<>();
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_DATE_RANGE_SQL)) {
+
+            // Convert LocalDate to timestamp (milliseconds since epoch)
+            long startTimestamp = startDate.atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli();
+            long endTimestamp = endDate.plusDays(1).atStartOfDay(java.time.ZoneId.systemDefault()).toInstant().toEpochMilli(); // Add 1 day to include end date
+
+            stmt.setLong(1, startTimestamp);
+            stmt.setLong(2, endTimestamp);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                expenses.add(mapResultSetToExpense(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding expenses by date range", e);
+        }
+        return expenses;
+    }
+
+
 }
