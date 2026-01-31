@@ -33,4 +33,19 @@ public class BillingService {
 
         return paymentDAO.save(payment);
     }
+
+    public Payment recordClassPayment(int memberId, double amount) {
+        Optional<Member> memberOpt = membershipService.findMemberById(memberId);
+        if (memberOpt.isEmpty()) {
+            throw new IllegalArgumentException("Member not found");
+        }
+
+        Payment payment = new Payment();
+        payment.setMemberId(memberId);
+        payment.setAmount(amount);
+        payment.setDate(LocalDate.now());
+        payment.setType(PaymentType.CLASS);
+
+        return paymentDAO.save(payment);
+    }
 }
