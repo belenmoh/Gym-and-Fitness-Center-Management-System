@@ -24,34 +24,24 @@ import java.util.List;
 public class AdminDashboardController {
     @FXML
     private Label welcomeLabel;
-
     @FXML
     private Label totalIncomeLabel;
-
     @FXML
     private Label totalExpensesLabel;
-
     @FXML
     private Label netCashFlowLabel;
-
     @FXML
     private Button refreshFinancialButton;
-
     @FXML
     private TableView<Payment> paymentsTableView;
-
     @FXML
     private TableColumn<Payment, Integer> paymentIdColumn;
-
     @FXML
     private TableColumn<Payment, Integer> paymentMemberIdColumn;
-
     @FXML
     private TableColumn<Payment, Double> paymentAmountColumn;
-
     @FXML
     private TableColumn<Payment, String> paymentDateColumn;
-
     @FXML
     private TableColumn<Payment, String> paymentTypeColumn;
 
