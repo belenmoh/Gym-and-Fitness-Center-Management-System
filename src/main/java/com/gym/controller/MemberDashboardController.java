@@ -226,4 +226,100 @@ public class MemberDashboardController {
         );
         paymentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
     }
+
+    @FXML
+    public void handleBookClass() {
+        try {
+            String className = classNameCombo.getValue();
+            LocalDate classDate = classDatePicker.getValue();
+            String classTimeStr = classTimeCombo.getValue();
+
+            if (className == null || classDate == null || classTimeStr == null) {
+                bookingMessageLabel.setText("Please select class, date, and time");
+                return;
+            }
+
+            if (currentMember == null) {
+                bookingMessageLabel.setText("Member data not found");
+                return;
+            }
+
+            if (!currentMember.isMembershipActive()) {
+                bookingMessageLabel.setText("Cannot book classes with expired membership");
+                return;
+            }
+
+            String[] timeParts = classTimeStr.split(":");
+            int hour = Integer.parseInt(timeParts[0]);
+            int minute = Integer.parseInt(timeParts[1]);
+            LocalDateTime classDateTime = classDate.atTime(hour, minute);
+
+            Booking booking = bookingService.bookClass(currentMember.getMemberId(), className, classDateTime);
+
+            bookingMessageLabel.setText("Class booked successfully! Booking ID: " + booking.getId());
+            clearBookingFields();
+            refreshBookingsTable();
+
+        } catch (Exception e) {
+            bookingMessageLabel.setText("Error: " + e.getMessage());
+        }
+    }
+
+    private void handleCancelBooking(Booking booking) {
+        try {
+            bookingService.cancelBooking(booking.getId());
+            bookingMessageLabel.setText("Booking cancelled successfully");
+            refreshBookingsTable();
+        } catch (Exception e) {
+            bookingMessageLabel.setText("Error cancelling booking: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleRefreshBookings() {
+        refreshBookingsTable();
+    }
+
+    @FXML
+    public void handleRefreshPayments() {
+        refreshPaymentsTable();
+    }
+
+    @FXML
+    public void handleLogout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Gym & Fitness Center - Login");
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading login screen: " + e.getMessage());
+        }
+    }
+
+    private void refreshBookingsTable() {
+        if (currentMember != null) {
+            List<Booking> bookings = bookingService.getBookingsByMember(currentMember.getMemberId());
+            ObservableList<Booking> bookingList = FXCollections.observableArrayList(bookings);
+            bookingsTableView.setItems(bookingList);
+        }
+    }
+
+    private void refreshPaymentsTable() {
+        if (currentMember != null) {
+            List<Payment> payments = paymentDAO.findByMemberId(currentMember.getMemberId());
+            ObservableList<Payment> paymentList = FXCollections.observableArrayList(payments);
+            paymentsTableView.setItems(paymentList);
+        }
+    }
+
+    private void clearBookingFields() {
+        classNameCombo.getSelectionModel().clearSelection();
+        classDatePicker.setValue(null);
+        classTimeCombo.getSelectionModel().clearSelection();
+    }
 }
