@@ -51,3 +51,100 @@
     -fx-font-size: 14px;
     -fx-font-weight: normal;
 }
+.financial-summary-box {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+.admin-theme {
+    -fx-background-image: url("images/login_bg3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-blend-mode: overlay;
+}
+.label-header-admin{
+    -fx-text-fill: #FADBD8;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-letter-spacing: 1px;
+}
+.admin-dashboard{
+    -fx-background-color: rgba(62, 33, 57, 0.7);
+    -fx-padding: 15;
+}
+
+.admin-tabpane .tab-header-area {
+    -fx-background-color: rgba(62, 33, 57, 0.7);
+    -fx-padding: 5 10 0 10;
+}
+
+.admin-tabpane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.admin-tabpane .tab {
+    -fx-background-color: rgba(62, 33, 57, 0.9);
+    -fx-background-radius: 8 8 0 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8 8 8 8;
+    /*-fx-border-width: 1;
+*/
+    /* ADD OR UPDATE THESE TWO LINES */
+    -fx-padding: 8 25 8 25;       /* Increases internal horizontal spacing */
+    -fx-background-insets: 0 5 5 0; /* Creates external visual gap to the right */
+}
+/*
+
+*/
+.admin-tabpane .tab:hover .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(one-pass-box, white, 5, 0, 0, 0);
+}
+.admin-tabpane .tab:pressed {
+    -fx-background-color: rgb(49, 0, 41);
+    -fx-translate-y: 2px;
+}
+
+.admin-tabpane .tab-pane {
+    -fx-tab-gap: 10px;
+}
+
+.admin-tabpane .tab:selected {
+    -fx-background-color: rgba(49, 0, 41, 1); /* Darker than your original 50, 60, 100 */
+    -fx-background-insets: 0 5 0 0, 0;            /* Keeps your spacing gap but resets internal layers */
+}
+.admin-tabpane .tab:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.admin-tabpane .tab:focused .tab-container {
+    -fx-background-color: transparent;
+}
+
+.admin-tabpane .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+.admin-refresh-button{
+    -fx-background-color: #C0392B;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-margin: 10 5 10 5;
+}
+.admin-refresh-button:hover {
+    -fx-background-color: #E74C3C;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.4), 15, 0, 0, 0);
+}
+.admin-refresh-button:pressed {
+    -fx-background-color: #922B21;
+    -fx-translate-y: 2px;
+}
