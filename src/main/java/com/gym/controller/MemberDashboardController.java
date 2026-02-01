@@ -28,82 +28,56 @@ import java.util.Optional;
 public class MemberDashboardController {
     @FXML
     private Label welcomeLabel;
-
     @FXML
     private Label memberIdLabel;
-
     @FXML
     private Label memberNameLabel;
-
     @FXML
     private Label membershipTypeLabel;
-
     @FXML
     private Label startDateLabel;
-
     @FXML
     private Label endDateLabel;
-
     @FXML
     private Label membershipStatusLabel;
-
     @FXML
     private TextArea benefitsTextArea;
-
     @FXML
     private ComboBox<String> classNameCombo;
-
     @FXML
     private DatePicker classDatePicker;
-
     @FXML
     private ComboBox<String> classTimeCombo;
-
     @FXML
     private Button bookClassButton;
-
     @FXML
     private Label bookingMessageLabel;
-
     @FXML
     private TableView<Booking> bookingsTableView;
-
     @FXML
     private TableColumn<Booking, Integer> bookingIdColumn;
-
     @FXML
     private TableColumn<Booking, String> classNameColumn;
-
     @FXML
     private TableColumn<Booking, String> classTimeColumn;
-
     @FXML
     private TableColumn<Booking, String> bookingTimeColumn;
-
     @FXML
     private TableColumn<Booking, String> bookingStatusColumn;
-
     @FXML
     private TableColumn<Booking, Void> bookingActionsColumn;
-
     @FXML
     private Button refreshBookingsButton;
-
     @FXML
     private TableView<Payment> paymentsTableView;
-
     @FXML
     private TableColumn<Payment, Integer> paymentIdColumn;
-
     @FXML
     private TableColumn<Payment, Double> paymentAmountColumn;
-
     @FXML
     private TableColumn<Payment, String> paymentDateColumn;
-
     @FXML
     private TableColumn<Payment, String> paymentTypeColumn;
-
     @FXML
     private Button refreshPaymentsButton;
 
