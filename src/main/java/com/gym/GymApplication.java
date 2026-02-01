@@ -30,4 +30,13 @@ public class GymApplication extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
+    private void initializeDatabase() {
+        try {
+            DatabaseUtil.getConnection();
+            System.out.println("Database initialized successfully");
+        } catch (Exception e) {
+            System.err.println("Failed to initialize database: " + e.getMessage());
+            throw new RuntimeException("Database initialization failed", e);
+        }
+    }
 }
