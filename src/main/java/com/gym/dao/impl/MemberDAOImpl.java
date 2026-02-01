@@ -200,7 +200,6 @@ public class MemberDAOImpl implements MemberDAO {
                 member.setStartDate(startDate.toLocalDate());
             }
         } catch (Exception e) {
-            // If date parsing fails, try to parse as timestamp
             try {
                 long timestamp = rs.getLong("start_date");
                 if (!rs.wasNull()) {
@@ -218,7 +217,6 @@ public class MemberDAOImpl implements MemberDAO {
                 member.setEndDate(endDate.toLocalDate());
             }
         } catch (Exception e) {
-            // If date parsing fails, try to parse as timestamp
             try {
                 long timestamp = rs.getLong("end_date");
                 if (!rs.wasNull()) {
