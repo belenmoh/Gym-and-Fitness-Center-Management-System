@@ -12,7 +12,6 @@ import java.util.List;
 public class FinancialService {
     private final PaymentDAO paymentDAO;
     private final ExpenseDAO expenseDAO;
-
     public FinancialService(PaymentDAO paymentDAO, ExpenseDAO expenseDAO) {
         this.paymentDAO = paymentDAO;
         this.expenseDAO = expenseDAO;
@@ -23,7 +22,6 @@ public class FinancialService {
                 .mapToDouble(Payment::getAmount)
                 .sum();
     }
-
     public double getTotalExpenses() {
         return expenseDAO.findAll().stream()
                 .mapToDouble(Expense::getAmount)
@@ -33,19 +31,15 @@ public class FinancialService {
     public double getNetCashFlow() {
         return getTotalIncome() - getTotalExpenses();
     }
-
     public double getTotalIncomeByMonth(int month, int year) {
         return paymentDAO.getTotalIncomeByMonth(month, year);
     }
-
     public double getTotalExpensesByMonth(int month, int year) {
         return expenseDAO.getTotalExpensesByMonth(month, year);
     }
-
     public double getNetCashFlowByMonth(int month, int year) {
         return getTotalIncomeByMonth(month, year) - getTotalExpensesByMonth(month, year);
     }
-
     public FinancialReport getMonthlyReport(int month, int year) {
         double totalIncome = getTotalIncomeByMonth(month, year);
         double totalExpenses = getTotalExpensesByMonth(month, year);
@@ -59,11 +53,9 @@ public class FinancialService {
         }
         return reports;
     }
-
     public List<Payment> getPaymentsByDateRange(LocalDate startDate, LocalDate endDate) {
         return paymentDAO.findByDateRange(startDate, endDate);
     }
-
     public List<Expense> getExpensesByDateRange(LocalDate startDate, LocalDate endDate) {
         return expenseDAO.findByDateRange(startDate, endDate);
     }
@@ -71,7 +63,6 @@ public class FinancialService {
     public List<Payment> getPaymentsByMonth(int month, int year) {
         return paymentDAO.findByMonth(month, year);
     }
-
     public List<Expense> getExpensesByMonth(int month, int year) {
         return expenseDAO.findByMonth(month, year);
     }
@@ -83,7 +74,6 @@ public class FinancialService {
         }
         return totalYearlyIncome / 12;
     }
-
     public double getAverageMonthlyExpenses(int year) {
         double totalYearlyExpenses = 0;
         for (int month = 1; month <= 12; month++) {
@@ -91,7 +81,6 @@ public class FinancialService {
         }
         return totalYearlyExpenses / 12;
     }
-
     public int getProfitableMonthsCount(int year) {
         int count = 0;
         for (int month = 1; month <= 12; month++) {
@@ -101,7 +90,6 @@ public class FinancialService {
         }
         return count;
     }
-
     public int getLossMonthsCount(int year) {
         int count = 0;
         for (int month = 1; month <= 12; month++) {
@@ -111,7 +99,6 @@ public class FinancialService {
         }
         return count;
     }
-
     public double getBestMonthIncome(int year) {
         double maxIncome = 0;
         for (int month = 1; month <= 12; month++) {
@@ -133,7 +120,6 @@ public class FinancialService {
         }
         return minIncome == Double.MAX_VALUE ? 0 : minIncome;
     }
-
     public FinancialReport getCurrentMonthReport() {
         LocalDate now = LocalDate.now();
         return getMonthlyReport(now.getMonthValue(), now.getYear());
