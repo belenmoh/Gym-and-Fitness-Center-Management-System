@@ -20,12 +20,10 @@ public class MembershipService {
         this.memberDAO = memberDAO;
         this.userDAO = userDAO;
     }
-
     public Member registerMember(Member member) {
         if (userDAO.existsByUsername(member.getUsername())) {
             throw new IllegalArgumentException("Username already exists");
         }
-
         userDAO.save(member);
         return memberDAO.save(member);
     }
@@ -35,10 +33,8 @@ public class MembershipService {
         if (memberOpt.isEmpty()) {
             throw new IllegalArgumentException("Member not found");
         }
-
         Member member = memberOpt.get();
         LocalDate endDate = LocalDate.now().plusMonths(newMembership.getDurationMonths());
-
         member.setMembership(newMembership);
         member.setStartDate(LocalDate.now());
         member.setEndDate(endDate);
@@ -49,15 +45,12 @@ public class MembershipService {
     public Optional<Member> findMemberById(int id) {
         return memberDAO.findById(id);
     }
-
     public List<Member> getAllMembers() {
         return memberDAO.findAll();
     }
-
     public List<Member> getActiveMembers() {
         return memberDAO.findActiveMembers();
     }
-
     public List<Member> getMembersByMembershipType(String membershipType) {
         return memberDAO.findByMembershipType(membershipType);
     }
@@ -75,7 +68,6 @@ public class MembershipService {
             default -> throw new IllegalArgumentException("Invalid membership type: " + type);
         };
     }
-
     public double calculateMembershipPrice(Membership membership) {
         return membership.getPrice() - membership.calculateDiscount();
     }
