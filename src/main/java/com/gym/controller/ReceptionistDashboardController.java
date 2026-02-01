@@ -178,6 +178,7 @@ public class ReceptionistDashboardController {
 
         refreshMembersTable();
     }
+
     @FXML
     public void handleRegisterMember() {
         try {
