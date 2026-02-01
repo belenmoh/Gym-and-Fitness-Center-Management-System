@@ -106,4 +106,124 @@ public class MemberDashboardController {
 
     @FXML
     private Button refreshPaymentsButton;
+    private User currentUser;
+    private Member currentMember;
+    private final MemberDAO memberDAO = new MemberDAOImpl();
+    private final BookingDAO bookingDAO = new BookingDAOImpl();
+    private final PaymentDAO paymentDAO = new PaymentDAOImpl();
+    private final BookingService bookingService = new BookingService(bookingDAO, memberDAO);
+
+    public void setUser(User user) {
+        this.currentUser = user;
+        this.welcomeLabel.setText("Welcome: " + user.getName());
+        loadMemberData();
+        initializeComboBoxes();
+        initializeBookingTableView();
+        initializePaymentTableView();
+    }
+
+    private void loadMemberData() {
+        Optional<Member> memberOpt = memberDAO.findByUserId(currentUser.getId());
+        if (memberOpt.isPresent()) {
+            currentMember = memberOpt.get();
+            displayMemberInfo();
+            refreshBookingsTable();
+            refreshPaymentsTable();
+        }
+    }
+
+    private void displayMemberInfo() {
+        if (currentMember != null) {
+            memberIdLabel.setText(String.valueOf(currentMember.getMemberId()));
+            memberNameLabel.setText(currentMember.getName());
+
+            if (currentMember.getMembership() != null) {
+                membershipTypeLabel.setText(currentMember.getMembership().getClass().getSimpleName());
+                benefitsTextArea.setText(currentMember.getMembership().getBenefits());
+            } else {
+                membershipTypeLabel.setText("None");
+                benefitsTextArea.setText("No active membership");
+            }
+
+            if (currentMember.getStartDate() != null) {
+                startDateLabel.setText(currentMember.getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            } else {
+                startDateLabel.setText("N/A");
+            }
+
+            if (currentMember.getEndDate() != null) {
+                endDateLabel.setText(currentMember.getEndDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            } else {
+                endDateLabel.setText("N/A");
+            }
+
+            boolean isActive = currentMember.isMembershipActive();
+            membershipStatusLabel.setText(isActive ? "Active" : "Expired");
+            membershipStatusLabel.setStyle(isActive ? "-fx-text-fill: #27ae60;" : "-fx-text-fill: #e74c3c;");
+        }
+    }
+
+    private void initializeComboBoxes() {
+        classNameCombo.setItems(FXCollections.observableArrayList(
+                "Yoga", "Pilates", "CrossFit", "Spinning", "Zumba", "Boxing", "Swimming", "Weight Training"
+        ));
+
+        classTimeCombo.setItems(FXCollections.observableArrayList(
+                "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
+        ));
+    }
+
+    private void initializeBookingTableView() {
+        bookingIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        classNameColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
+        classTimeColumn.setCellValueFactory(cellData ->
+                javafx.beans.binding.Bindings.createStringBinding(
+                        () -> cellData.getValue().getClassTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                )
+        );
+        bookingTimeColumn.setCellValueFactory(cellData ->
+                javafx.beans.binding.Bindings.createStringBinding(
+                        () -> cellData.getValue().getBookingTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                )
+        );
+        bookingStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        bookingActionsColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button cancelButton = new Button("Cancel");
+
+            {
+                cancelButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white;");
+                cancelButton.setOnAction(event -> {
+                    Booking booking = getTableView().getItems().get(getIndex());
+                    handleCancelBooking(booking);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    Booking booking = getTableView().getItems().get(getIndex());
+                    if (booking.getStatus() == BookingStatus.BOOKED) {
+                        setGraphic(cancelButton);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            }
+        });
+    }
+
+    private void initializePaymentTableView() {
+        paymentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        paymentDateColumn.setCellValueFactory(cellData ->
+                javafx.beans.binding.Bindings.createStringBinding(
+                        () -> cellData.getValue().getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                )
+        );
+        paymentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+    }
 }
