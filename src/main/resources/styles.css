@@ -1,0 +1,401 @@
+/* Global Styles */
+
+@font-face {
+    font-family: 'Oswald-Bold';
+    src: url('fonts/Oswald-Bold.ttf');
+}
+
+.login-background {
+    -fx-background-image: url("images/login_bg3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-background-blend-mode: overlay;
+}
+
+.title {
+    -fx-font-family: 'Oswald-Bold';
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+    -fx-text-fill: #FFFFFF;
+    -fx-ellipsis-string: "";
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.login-header {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E6B0AA;
+    -fx-underline: true;
+}
+
+.label-header {
+    -fx-text-fill: #FADBD8;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-letter-spacing: 1px;
+}
+
+.card {
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(69, 11, 11, 0.35); /* Deep Wine Tint */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 20, 0, 0, 10);
+    -fx-border-color: rgba(255, 184, 184, 0.15);
+    -fx-border-radius: 20;
+    -fx-border-width: 1.5;
+}
+.label-value {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+}
+.financial-summary-box {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 15;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+}
+
+.admin-theme {
+    -fx-background-image: url("images/login_bg3.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-background-blend-mode: overlay;
+}
+.label-header-admin{
+    -fx-text-fill: #FADBD8;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-letter-spacing: 1px;
+}
+.admin-dashboard{
+    -fx-background-color: rgba(62, 33, 57, 0.7);
+    -fx-padding: 15;
+}
+
+.admin-tabpane .tab-header-area {
+    -fx-background-color: rgba(62, 33, 57, 0.7);
+    -fx-padding: 5 10 0 10;
+}
+
+.admin-tabpane .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.admin-tabpane .tab {
+    -fx-background-color: rgba(62, 33, 57, 0.9);
+    -fx-background-radius: 8 8 0 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8 8 8 8;
+    /*-fx-border-width: 1;
+*/
+    /* ADD OR UPDATE THESE TWO LINES */
+    -fx-padding: 8 25 8 25;       /* Increases internal horizontal spacing */
+    -fx-background-insets: 0 5 5 0; /* Creates external visual gap to the right */
+}
+/*
+
+*/
+.admin-tabpane .tab:hover .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(one-pass-box, white, 5, 0, 0, 0);
+}
+.admin-tabpane .tab:pressed {
+    -fx-background-color: rgb(49, 0, 41);
+    -fx-translate-y: 2px;
+}
+
+.admin-tabpane .tab-pane {
+    -fx-tab-gap: 10px;
+}
+
+.admin-tabpane .tab:selected {
+    -fx-background-color: rgba(49, 0, 41, 1); /* Darker than your original 50, 60, 100 */
+    -fx-background-insets: 0 5 0 0, 0;            /* Keeps your spacing gap but resets internal layers */
+}
+.admin-tabpane .tab:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+.admin-tabpane .tab:focused .tab-container {
+    -fx-background-color: transparent;
+}
+
+.admin-tabpane .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+.admin-refresh-button{
+    -fx-background-color: #C0392B;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-margin: 10 5 10 5;
+}
+.admin-refresh-button:hover {
+    -fx-background-color: #E74C3C;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.4), 15, 0, 0, 0);
+}
+.admin-refresh-button:pressed {
+    -fx-background-color: #922B21;
+    -fx-translate-y: 2px;
+}
+.profit-status {
+    -fx-text-fill: #27AE60; /* Green for profit */
+    -fx-font-weight: bold;
+}
+
+.loss-status {
+    -fx-text-fill: #E74C3C; /* Red for loss */
+    -fx-font-weight: bold;
+}
+
+.neutral-status {
+    -fx-text-fill: #F39C12; /* Orange for neutral */
+    -fx-font-weight: bold;
+}
+
+.suggestion-text {
+    -fx-text-fill: #ECF0F1;
+    -fx-background-color: rgba(52, 73, 94, 0.3);
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+}
+.payments-table {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 5);
+}
+
+.payments-table .column-header-background {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 1 1 0;
+}
+
+.payments-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 12 15;
+}
+
+.payments-table .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+.payments-table .table-cell {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 15;
+    -fx-text-fill: #ECF0F1;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER;
+}
+.payments-table .filler {
+    -fx-background-color: transparent;
+}
+.payments-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.payments-table .table-row-cell:selected {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1;
+}
+
+.payments-table .table-row-cell:hover {
+    -fx-background-color: rgba(60, 70, 110, 0.7);
+}
+
+.payments-table .scroll-bar:vertical {
+    -fx-background-color: rgba(50, 60, 100, 0.5);
+    -fx-background-radius: 5;
+}
+
+.payments-table .scroll-bar:vertical .track {
+    -fx-background-color: rgba(30, 40, 70, 0.3);
+    -fx-background-radius: 5;
+}
+
+.payments-table .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(100, 120, 180, 0.8);
+    -fx-background-radius: 5;
+}
+
+.payments-table .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(120, 140, 200, 0.9);
+}
+.expenses-table .virtual-flow {
+    -fx-background-color: transparent;
+}
+/* Exenses table*/
+/* Specific Class for the Expenses Table */
+.expenses-table {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-fixed-cell-size: 35px;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Header styling */
+.expenses-table .column-header-background {
+    -fx-background-color: rgba(49, 0, 41, 0.8); /* Dark Purple Header */
+    -fx-background-radius: 10 10 0 0;
+}
+
+.expenses-table .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.expenses-table .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+/* Cell styling */
+.expenses-table .table-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+}
+
+/* Row styling */
+.expenses-table .table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.expenses-table .table-row-cell:hover {
+    -fx-background-color: rgba(62, 33, 57, 0.5); /* Hover Purple */
+}
+
+.expenses-table .table-row-cell:selected {
+    -fx-background-color: rgba(49, 0, 41, 0.9); /* Selected Dark Purple */
+}
+
+/* Remove extra column at the end */
+.expenses-table .filler {
+    -fx-background-color: transparent;
+}
+.text-field, .password-field {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #99A3A4;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: #E6B0AA;
+}
+.button {
+    -fx-background-color: #C0392B;
+    -fx-text-fill: white;
+    -fx-background-radius: 25;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-margin: 10 5 10 5;
+}
+
+.button:hover {
+    -fx-background-color: #E74C3C;
+    -fx-effect: dropshadow(gaussian, rgba(231, 76, 60, 0.4), 15, 0, 0, 0);
+}
+
+.button:pressed {
+    -fx-background-color: #922B21;
+    -fx-translate-y: 2px;
+}
+/* --- EXPENSES CARD & FORM CONTAINERS --- */
+.expenses-card {
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(69, 11, 11, 0.35); /* Deep Wine Tint */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 20, 0, 0, 10);
+    -fx-border-color: rgba(255, 184, 184, 0.15);
+    -fx-border-radius: 20;
+    -fx-border-width: 1.5;
+    -fx-padding: 25;
+    -fx-min-height: -preferred;
+    -fx-max-width: 500;
+}
+
+/* --- DATE PICKER & COMBOBOX BASE --- */
+.expenses-card .date-picker,
+.expenses-card .combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Selected Text inside the ComboBox (Closed State) */
+.expenses-card .combo-box .list-cell {
+    -fx-text-fill: white !important;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 5;
+}
+
+/* Arrow Styling */
+.expenses-card .combo-box .arrow-button,
+.expenses-card .date-picker .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.expenses-card .combo-box .arrow,
+.expenses-card .date-picker .arrow {
+    -fx-background-color: #FADBD8; /* Light Pink Arrow */
+}
+
+/* --- COMBOBOX DROPDOWN MENU (OPEN STATE) --- */
+
+/* The main container of the dropdown list */
+.expenses-card .combo-box-base .list-view {
+    -fx-background-color: #2D2D2D; /* Dark Background */
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Individual items in the list */
+.expenses-card .combo-box-base .list-view .list-cell {
+    -fx-text-fill: white !important; /* Force text white on dark bg */
+    -fx-background-color: transparent;
+    -fx-padding: 8 10;
+}
+
+/* Hover/Selection effect in the list */
+.expenses-card .combo-box-base .list-view .list-cell:hover,
+.expenses-card .combo-box-base .list-view .list-cell:filled:selected {
+    -fx-background-color: rgba(62, 33, 57, 0.9); /* Midnight Plum */
+    -fx-text-fill: white !important;
+}
+.member-theme { -fx-background-color: transparent; }
+/*end of login page css*/
