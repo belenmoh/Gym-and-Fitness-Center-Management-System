@@ -106,6 +106,7 @@ public class MemberDashboardController {
 
     @FXML
     private Button refreshPaymentsButton;
+
     private User currentUser;
     private Member currentMember;
     private final MemberDAO memberDAO = new MemberDAOImpl();
