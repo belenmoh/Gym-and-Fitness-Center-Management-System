@@ -105,4 +105,77 @@ public class ReceptionistDashboardController {
 
     @FXML
     private Label cancelMembershipMessageLabel;
+
+    private User currentUser;
+    private final UserDAO userDAO = new UserDAOImpl();
+    private final MemberDAO memberDAO = new MemberDAOImpl();
+    private final PaymentDAO paymentDAO = new PaymentDAOImpl();
+    private final MembershipService membershipService = new MembershipService(memberDAO, userDAO);
+    private final BillingService billingService = new BillingService(paymentDAO, membershipService);
+
+    public void setUser(User user) {
+        this.currentUser = user;
+        welcomeLabel.setText("Welcome: " + user.getName());
+        initializeComboBoxes();
+        initializeTableView();
+    }
+
+    private void initializeComboBoxes() {
+        membershipTypeCombo.setItems(FXCollections.observableArrayList(
+                "Monthly", "Annual", "VIP"
+        ));
+
+        // Add listener to update price when membership type changes
+        membershipTypeCombo.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldValue, newValue) -> updateMembershipPrice(newValue)
+        );
+
+        renewMembershipCombo.setItems(FXCollections.observableArrayList(
+                "Monthly", "Annual", "VIP"
+        ));
+
+        paymentTypeCombo.setItems(FXCollections.observableArrayList(
+                PaymentType.MEMBERSHIP, PaymentType.CLASS, PaymentType.OTHER
+        ));
+    }
+
+    private void updateMembershipPrice(String membershipType) {
+        double price = getMembershipPrice(membershipType);
+        membershipPriceLabel.setText(String.format("ETB %.2f", price));
+    }
+
+    private double getMembershipPrice(String membershipType) {
+        if (membershipType == null) return 0.0;
+
+        switch (membershipType) {
+            case "Monthly":
+                return 2500.0;   // 2500 ETB for monthly
+            case "Annual":
+                return 25000.0;  // 25000 ETB for annual (good discount)
+            case "VIP":
+                return 50000.0;  // 50000 ETB for VIP
+            default:
+                return 0.0;
+        }
+    }
+
+    private void initializeTableView() {
+        memberIdColumn.setCellValueFactory(new PropertyValueFactory<>("memberId"));
+        memberNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        memberUsernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        memberMembershipColumn.setCellValueFactory(cellData -> {
+            Membership membership = cellData.getValue().getMembership();
+            return javafx.beans.binding.Bindings.createStringBinding(
+                    () -> membership != null ? membership.getClass().getSimpleName() : "None"
+            );
+        });
+        memberEndDateColumn.setCellValueFactory(cellData -> {
+            LocalDate endDate = cellData.getValue().getEndDate();
+            return javafx.beans.binding.Bindings.createStringBinding(
+                    () -> endDate != null ? endDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : "N/A"
+            );
+        });
+
+        refreshMembersTable();
+    }
 }
