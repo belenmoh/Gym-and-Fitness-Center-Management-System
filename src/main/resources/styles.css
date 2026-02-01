@@ -212,3 +212,36 @@
 .payments-table .filler {
     -fx-background-color: transparent;
 }
+.payments-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.payments-table .table-row-cell:selected {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1;
+}
+
+.payments-table .table-row-cell:hover {
+    -fx-background-color: rgba(60, 70, 110, 0.7);
+}
+
+.payments-table .scroll-bar:vertical {
+    -fx-background-color: rgba(50, 60, 100, 0.5);
+    -fx-background-radius: 5;
+}
+
+.payments-table .scroll-bar:vertical .track {
+    -fx-background-color: rgba(30, 40, 70, 0.3);
+    -fx-background-radius: 5;
+}
+
+.payments-table .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(100, 120, 180, 0.8);
+    -fx-background-radius: 5;
+}
+
+.payments-table .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(120, 140, 200, 0.9);
+}
