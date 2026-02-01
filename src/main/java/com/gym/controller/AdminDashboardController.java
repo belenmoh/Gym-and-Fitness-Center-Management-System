@@ -44,22 +44,16 @@ public class AdminDashboardController {
     private TableColumn<Payment, String> paymentDateColumn;
     @FXML
     private TableColumn<Payment, String> paymentTypeColumn;
-
     @FXML
     private Button refreshPaymentsButton;
-
     @FXML
     private TextField expenseDescriptionField;
-
     @FXML
     private TextField expenseAmountField;
-
     @FXML
     private DatePicker expenseDatePicker;
-
     @FXML
     private ComboBox<ExpenseCategory> expenseCategoryCombo;
-
     @FXML
     private Button addExpenseButton;
 
