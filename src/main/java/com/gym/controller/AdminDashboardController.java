@@ -24,76 +24,48 @@ import java.util.List;
 public class AdminDashboardController {
     @FXML
     private Label welcomeLabel;
-
     @FXML
     private Label totalIncomeLabel;
-
     @FXML
     private Label totalExpensesLabel;
-
     @FXML
     private Label netCashFlowLabel;
-
-    @FXML
-    private Label profitLossLabel;
-
-    @FXML
-    private Label suggestionLabel;
-
     @FXML
     private Button refreshFinancialButton;
-
     @FXML
     private TableView<Payment> paymentsTableView;
-
     @FXML
     private TableColumn<Payment, Integer> paymentIdColumn;
-
     @FXML
     private TableColumn<Payment, Integer> paymentMemberIdColumn;
-
     @FXML
     private TableColumn<Payment, Double> paymentAmountColumn;
-
     @FXML
     private TableColumn<Payment, String> paymentDateColumn;
-
     @FXML
     private TableColumn<Payment, String> paymentTypeColumn;
-
     @FXML
     private Button refreshPaymentsButton;
-
     @FXML
     private TextField expenseDescriptionField;
-
     @FXML
     private TextField expenseAmountField;
-
     @FXML
     private DatePicker expenseDatePicker;
-
     @FXML
     private ComboBox<ExpenseCategory> expenseCategoryCombo;
-
     @FXML
     private Button addExpenseButton;
-
     @FXML
     private Label expenseMessageLabel;
-
     @FXML
     private TableView<Expense> expensesTableView;
-
     @FXML
     private TableColumn<Expense, Integer> expenseIdColumn;
-
     @FXML
     private TableColumn<Expense, String> expenseDescriptionColumn;
-
     @FXML
     private TableColumn<Expense, Double> expenseAmountColumn;
-
     @FXML
     private TableColumn<Expense, String> expenseDateColumn;
 
@@ -102,25 +74,18 @@ public class AdminDashboardController {
 
     @FXML
     private Button refreshExpensesButton;
-
     @FXML
     private ComboBox<String> reportMonthCombo;
-
     @FXML
     private ComboBox<String> reportYearCombo;
-
     @FXML
     private Button generateReportButton;
-
     @FXML
     private Label reportTitleLabel;
-
     @FXML
     private Label reportIncomeLabel;
-
     @FXML
     private Label reportExpensesLabel;
-
     @FXML
     private Label reportNetFlowLabel;
 
@@ -219,6 +184,7 @@ public class AdminDashboardController {
         );
         expenseCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
     }
+
     @FXML
     public void handleRefreshFinancial() {
         refreshFinancialData();
@@ -329,9 +295,8 @@ public class AdminDashboardController {
         totalIncomeLabel.setStyle(totalIncome >= 0 ? "-fx-text-fill: #27ae60;" : "-fx-text-fill: #e74c3c;");
         totalExpensesLabel.setStyle("-fx-text-fill: #e74c3c;");
         netCashFlowLabel.setStyle(netCashFlow >= 0 ? "-fx-text-fill: #27ae60;" : "-fx-text-fill: #e74c3c;");
-
-        updateProfitLossStatus(netCashFlow, totalIncome, totalExpenses);
     }
+
 
     private void refreshPaymentsTable() {
         List<Payment> payments = financialService.getPaymentsByDateRange(
@@ -341,6 +306,7 @@ public class AdminDashboardController {
         paymentsTableView.setItems(paymentList);
     }
 
+
     private void refreshExpensesTable() {
         List<Expense> expenses = financialService.getExpensesByDateRange(
                 LocalDate.now().minusMonths(12), LocalDate.now()
@@ -349,59 +315,12 @@ public class AdminDashboardController {
         expensesTableView.setItems(expenseList);
     }
 
+
     private void clearExpenseFields() {
         expenseDescriptionField.clear();
         expenseAmountField.clear();
         expenseDatePicker.setValue(null);
         expenseCategoryCombo.getSelectionModel().clearSelection();
     }
-
-    private void updateProfitLossStatus(double netCashFlow, double totalIncome, double totalExpenses) {
-        if (netCashFlow > 0) {
-            profitLossLabel.setText("✓ Company is in PROFIT");
-            profitLossLabel.getStyleClass().removeAll("loss-status", "neutral-status");
-            profitLossLabel.getStyleClass().add("profit-status");
-
-            String suggestion = generateProfitSuggestion(netCashFlow, totalIncome);
-            suggestionLabel.setText(suggestion);
-            suggestionLabel.getStyleClass().add("suggestion-text");
-        } else if (netCashFlow < 0) {
-            profitLossLabel.setText("✗ Company is in LOSS");
-            profitLossLabel.getStyleClass().removeAll("profit-status", "neutral-status");
-            profitLossLabel.getStyleClass().add("loss-status");
-
-            String suggestion = generateLossSuggestion(Math.abs(netCashFlow), totalExpenses);
-            suggestionLabel.setText(suggestion);
-            suggestionLabel.getStyleClass().add("suggestion-text");
-        } else {
-            profitLossLabel.setText("⚖ Company is BREAKING EVEN");
-            profitLossLabel.getStyleClass().removeAll("profit-status", "loss-status");
-            profitLossLabel.getStyleClass().add("neutral-status");
-
-            suggestionLabel.setText("Consider reviewing expenses and exploring new revenue streams to improve profitability.");
-            suggestionLabel.getStyleClass().add("suggestion-text");
-        }
-    }
-
-    private String generateProfitSuggestion(double netCashFlow, double totalIncome) {
-        double profitMargin = (netCashFlow / totalIncome) * 100;
-
-        if (profitMargin > 20) {
-            return "Excellent performance! Consider reinvesting profits into business expansion or staff bonuses.";
-        } else if (profitMargin > 10) {
-            return "Good profit margin. Consider marketing investments to grow membership base.";
-        } else {
-            return "Modest profit. Review operational efficiency and explore additional revenue streams.";
-        }
-    }
-
-    private String generateLossSuggestion(double lossAmount, double totalExpenses) {
-        if (lossAmount > totalExpenses * 0.3) {
-            return "Significant loss detected. Immediate cost reduction measures required. Review all expenses and consider temporary service adjustments.";
-        } else if (lossAmount > totalExpenses * 0.1) {
-            return "Moderate loss. Focus on increasing membership retention and reducing non-essential expenses.";
-        } else {
-            return "Minor loss. Implement promotional campaigns and review vendor contracts for better rates.";
-        }
-    }
 }
+
