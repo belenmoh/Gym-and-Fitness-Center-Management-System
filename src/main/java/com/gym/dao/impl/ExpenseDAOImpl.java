@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ExpenseDAOImpl implements ExpenseDAO{
+public class ExpenseDAOImpl implements ExpenseDAO {
+
     private static final String INSERT_SQL =
             "INSERT INTO expenses (description, amount, date, category) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL =
@@ -91,6 +92,7 @@ public class ExpenseDAOImpl implements ExpenseDAO{
         }
         return expenses;
     }
+
     @Override
     public List<Expense> findByDateRange(LocalDate startDate, LocalDate endDate) {
         List<Expense> expenses = new ArrayList<>();
@@ -234,5 +236,4 @@ public class ExpenseDAOImpl implements ExpenseDAO{
 
         return expense;
     }
-
 }
