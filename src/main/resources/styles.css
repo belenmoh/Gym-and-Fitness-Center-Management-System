@@ -148,3 +148,26 @@
     -fx-background-color: #922B21;
     -fx-translate-y: 2px;
 }
+.profit-status {
+    -fx-text-fill: #27AE60; /* Green for profit */
+    -fx-font-weight: bold;
+}
+
+.loss-status {
+    -fx-text-fill: #E74C3C; /* Red for loss */
+    -fx-font-weight: bold;
+}
+
+.neutral-status {
+    -fx-text-fill: #F39C12; /* Orange for neutral */
+    -fx-font-weight: bold;
+}
+
+.suggestion-text {
+    -fx-text-fill: #ECF0F1;
+    -fx-background-color: rgba(52, 73, 94, 0.3);
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+}
