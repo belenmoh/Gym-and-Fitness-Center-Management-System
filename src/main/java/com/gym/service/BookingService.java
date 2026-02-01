@@ -17,20 +17,16 @@ public class BookingService {
         this.bookingDAO = bookingDAO;
         this.memberDAO = memberDAO;
     }
-
     public Booking bookClass(int memberId, String className, LocalDateTime classTime) {
         if (!memberDAO.findById(memberId).isPresent()) {
             throw new IllegalArgumentException("Member not found");
         }
-
         if (classTime.isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("Cannot book classes in the past");
         }
-
         if (hasConflictingBooking(memberId, classTime)) {
             throw new IllegalArgumentException("Member already has a booking at this time");
         }
-
         Booking booking = new Booking();
         booking.setMemberId(memberId);
         booking.setClassName(className);
@@ -46,12 +42,10 @@ public class BookingService {
         if (bookingOpt.isEmpty()) {
             throw new IllegalArgumentException("Booking not found");
         }
-
         Booking booking = bookingOpt.get();
         if (booking.getStatus() != BookingStatus.BOOKED) {
             throw new IllegalArgumentException("Cannot cancel a booking that is not in BOOKED status");
         }
-
         booking.setStatus(BookingStatus.CANCELLED);
         return bookingDAO.update(booking);
     }
@@ -59,23 +53,18 @@ public class BookingService {
     public Optional<Booking> findBookingById(int id) {
         return bookingDAO.findById(id);
     }
-
     public List<Booking> getBookingsByMember(int memberId) {
         return bookingDAO.findByMemberId(memberId);
     }
-
     public List<Booking> getBookingsByClass(String className) {
         return bookingDAO.findByClassName(className);
     }
-
     public List<Booking> getBookingsByStatus(BookingStatus status) {
         return bookingDAO.findByStatus(status);
     }
-
     public List<Booking> getBookingsByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
         return bookingDAO.findByDateRange(startDate, endDate);
     }
-
     public List<Booking> getAllBookings() {
         return bookingDAO.findAll();
     }
@@ -98,7 +87,6 @@ public class BookingService {
         if (bookingOpt.isEmpty()) {
             throw new IllegalArgumentException("Booking not found");
         }
-
         Booking booking = bookingOpt.get();
         booking.setStatus(BookingStatus.NO_SHOW);
         bookingDAO.update(booking);
@@ -109,7 +97,6 @@ public class BookingService {
         if (bookingOpt.isEmpty()) {
             throw new IllegalArgumentException("Booking not found");
         }
-
         Booking booking = bookingOpt.get();
         booking.setStatus(BookingStatus.COMPLETED);
         bookingDAO.update(booking);
