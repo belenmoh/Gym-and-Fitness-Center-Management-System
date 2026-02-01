@@ -56,22 +56,16 @@ public class AdminDashboardController {
     private ComboBox<ExpenseCategory> expenseCategoryCombo;
     @FXML
     private Button addExpenseButton;
-
     @FXML
     private Label expenseMessageLabel;
-
     @FXML
     private TableView<Expense> expensesTableView;
-
     @FXML
     private TableColumn<Expense, Integer> expenseIdColumn;
-
     @FXML
     private TableColumn<Expense, String> expenseDescriptionColumn;
-
     @FXML
     private TableColumn<Expense, Double> expenseAmountColumn;
-
     @FXML
     private TableColumn<Expense, String> expenseDateColumn;
 
@@ -80,25 +74,18 @@ public class AdminDashboardController {
 
     @FXML
     private Button refreshExpensesButton;
-
     @FXML
     private ComboBox<String> reportMonthCombo;
-
     @FXML
     private ComboBox<String> reportYearCombo;
-
     @FXML
     private Button generateReportButton;
-
     @FXML
     private Label reportTitleLabel;
-
     @FXML
     private Label reportIncomeLabel;
-
     @FXML
     private Label reportExpensesLabel;
-
     @FXML
     private Label reportNetFlowLabel;
 
@@ -310,6 +297,7 @@ public class AdminDashboardController {
         netCashFlowLabel.setStyle(netCashFlow >= 0 ? "-fx-text-fill: #27ae60;" : "-fx-text-fill: #e74c3c;");
     }
 
+
     private void refreshPaymentsTable() {
         List<Payment> payments = financialService.getPaymentsByDateRange(
                 LocalDate.now().minusMonths(12), LocalDate.now()
@@ -318,6 +306,7 @@ public class AdminDashboardController {
         paymentsTableView.setItems(paymentList);
     }
 
+
     private void refreshExpensesTable() {
         List<Expense> expenses = financialService.getExpensesByDateRange(
                 LocalDate.now().minusMonths(12), LocalDate.now()
@@ -325,6 +314,7 @@ public class AdminDashboardController {
         ObservableList<Expense> expenseList = FXCollections.observableArrayList(expenses);
         expensesTableView.setItems(expenseList);
     }
+
 
     private void clearExpenseFields() {
         expenseDescriptionField.clear();
