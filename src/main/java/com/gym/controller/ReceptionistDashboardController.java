@@ -27,82 +27,56 @@ import java.util.List;
 public class ReceptionistDashboardController {
     @FXML
     private Label welcomeLabel;
-
     @FXML
     private TextField memberNameField;
-
     @FXML
     private TextField memberUsernameField;
-
     @FXML
     private PasswordField memberPasswordField;
-
     @FXML
     private ComboBox<String> membershipTypeCombo;
-
     @FXML
     private Label membershipPriceLabel;
-
     @FXML
     private Button registerMemberButton;
-
     @FXML
     private Label registerMessageLabel;
-
     @FXML
     private TextField renewMemberIdField;
-
     @FXML
     private ComboBox<String> renewMembershipCombo;
-
     @FXML
     private TextField renewPriceField;
-
     @FXML
     private Button renewMembershipButton;
-
     @FXML
     private Label renewMessageLabel;
-
     @FXML
     private TextField paymentMemberIdField;
-
     @FXML
     private TextField paymentAmountField;
-
     @FXML
     private ComboBox<PaymentType> paymentTypeCombo;
-
     @FXML
     private Button recordPaymentButton;
-
     @FXML
     private Label paymentMessageLabel;
-
     @FXML
     private TableView<Member> membersTableView;
-
     @FXML
     private TableColumn<Member, Integer> memberIdColumn;
-
     @FXML
     private TableColumn<Member, String> memberNameColumn;
-
     @FXML
     private TableColumn<Member, String> memberUsernameColumn;
-
     @FXML
     private TableColumn<Member, String> memberMembershipColumn;
-
     @FXML
     private TableColumn<Member, String> memberEndDateColumn;
-
     @FXML
     private Button refreshMembersButton;
-
     @FXML
     private Button cancelMembershipButton;
-
     @FXML
     private Label cancelMembershipMessageLabel;
 
