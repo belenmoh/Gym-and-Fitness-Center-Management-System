@@ -171,3 +171,44 @@
     -fx-border-radius: 10;
     -fx-border-color: rgba(255, 255, 255, 0.1);
 }
+.payments-table {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 5);
+}
+
+.payments-table .column-header-background {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 1 1 0;
+}
+
+.payments-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 12 15;
+}
+
+.payments-table .column-header .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+.payments-table .table-cell {
+    -fx-background-color: rgba(69, 11, 11, 0.35);
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 15;
+    -fx-text-fill: #ECF0F1;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER;
+}
+.payments-table .filler {
+    -fx-background-color: transparent;
+}
