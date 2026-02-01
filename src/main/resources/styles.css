@@ -100,6 +100,9 @@
     -fx-padding: 8 25 8 25;       /* Increases internal horizontal spacing */
     -fx-background-insets: 0 5 5 0; /* Creates external visual gap to the right */
 }
+/*
+
+*/
 .admin-tabpane .tab:hover .tab-label {
     -fx-text-fill: #FFFFFF;
     -fx-effect: dropshadow(one-pass-box, white, 5, 0, 0, 0);
@@ -145,7 +148,6 @@
     -fx-background-color: #922B21;
     -fx-translate-y: 2px;
 }
-
 .profit-status {
     -fx-text-fill: #27AE60; /* Green for profit */
     -fx-font-weight: bold;
@@ -169,7 +171,6 @@
     -fx-border-radius: 10;
     -fx-border-color: rgba(255, 255, 255, 0.1);
 }
-
 .payments-table {
     -fx-background-color: rgba(69, 11, 11, 0.35);
     -fx-border-color: rgba(255, 255, 255, 0.2);
@@ -198,6 +199,7 @@
     -fx-alignment: CENTER;
     -fx-text-alignment: CENTER;
 }
+
 .payments-table .table-cell {
     -fx-background-color: rgba(69, 11, 11, 0.35);
     -fx-border-color: rgba(255, 255, 255, 0.05);
@@ -246,8 +248,8 @@
 .expenses-table .virtual-flow {
     -fx-background-color: transparent;
 }
-
 /* Exenses table*/
+/* Specific Class for the Expenses Table */
 .expenses-table {
     -fx-background-color: rgba(69, 11, 11, 0.35);
     -fx-fixed-cell-size: 35px;
@@ -273,7 +275,7 @@
     -fx-alignment: CENTER;
 }
 
-/*cell styling*/
+/* Cell styling */
 .expenses-table .table-cell {
     -fx-alignment: CENTER;
     -fx-padding: 10;
@@ -295,6 +297,8 @@
 .expenses-table .table-row-cell:selected {
     -fx-background-color: rgba(49, 0, 41, 0.9); /* Selected Dark Purple */
 }
+
+/* Remove extra column at the end */
 .expenses-table .filler {
     -fx-background-color: transparent;
 }
@@ -312,7 +316,6 @@
     -fx-background-color: rgba(255, 255, 255, 0.15);
     -fx-border-color: #E6B0AA;
 }
-
 .button {
     -fx-background-color: #C0392B;
     -fx-text-fill: white;
@@ -331,7 +334,7 @@
     -fx-background-color: #922B21;
     -fx-translate-y: 2px;
 }
-
+/* --- EXPENSES CARD & FORM CONTAINERS --- */
 .expenses-card {
     -fx-background-radius: 20;
     -fx-background-color: rgba(69, 11, 11, 0.35); /* Deep Wine Tint */
@@ -344,6 +347,7 @@
     -fx-max-width: 500;
 }
 
+/* --- DATE PICKER & COMBOBOX BASE --- */
 .expenses-card .date-picker,
 .expenses-card .combo-box {
     -fx-background-color: rgba(255, 255, 255, 0.08);
@@ -352,12 +356,14 @@
     -fx-background-radius: 5;
 }
 
+/* Selected Text inside the ComboBox (Closed State) */
 .expenses-card .combo-box .list-cell {
     -fx-text-fill: white !important;
     -fx-font-weight: bold;
     -fx-padding: 0 0 0 5;
 }
 
+/* Arrow Styling */
 .expenses-card .combo-box .arrow-button,
 .expenses-card .date-picker .arrow-button {
     -fx-background-color: transparent;
@@ -368,6 +374,9 @@
     -fx-background-color: #FADBD8; /* Light Pink Arrow */
 }
 
+/* --- COMBOBOX DROPDOWN MENU (OPEN STATE) --- */
+
+/* The main container of the dropdown list */
 .expenses-card .combo-box-base .list-view {
     -fx-background-color: #2D2D2D; /* Dark Background */
     -fx-border-color: rgba(255, 255, 255, 0.2);
@@ -375,16 +384,18 @@
     -fx-background-radius: 5;
 }
 
+/* Individual items in the list */
 .expenses-card .combo-box-base .list-view .list-cell {
     -fx-text-fill: white !important; /* Force text white on dark bg */
     -fx-background-color: transparent;
     -fx-padding: 8 10;
 }
 
+/* Hover/Selection effect in the list */
 .expenses-card .combo-box-base .list-view .list-cell:hover,
 .expenses-card .combo-box-base .list-view .list-cell:filled:selected {
     -fx-background-color: rgba(62, 33, 57, 0.9); /* Midnight Plum */
     -fx-text-fill: white !important;
 }
-
 .member-theme { -fx-background-color: transparent; }
+/*end of login page css*/

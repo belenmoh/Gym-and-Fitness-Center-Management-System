@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="650.0" prefWidth="850.0" styleClass="reception-theme" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.ReceptionistDashboardController">
+<BorderPane prefHeight="650.0" prefWidth="850.0" styleClass="admin-theme" stylesheets="@../styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.controller.ReceptionistDashboardController">
     <top>
-        <VBox style="-fx-background-color: #546E7A; -fx-padding: 15;">
+        <VBox styleClass="admin-dashboard">
             <children>
                 <Label text="Receptionist Dashboard" styleClass="title" textFill="white">
                     <font>
@@ -24,13 +24,13 @@
         </VBox>
     </top>
     <center>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" styleClass="admin-tabpane">
             <tabs>
                 <Tab text="Register Member">
                     <content>
                         <VBox spacing="20.0" style="-fx-padding: 25;">
                             <children>
-                                <VBox styleClass="card" spacing="20.0">
+                                <VBox styleClass="expenses-card" spacing="20.0">
                                     <children>
                                         <Label text="Register New Member" styleClass="title" />
                                         <GridPane hgap="20.0" vgap="15.0">
@@ -44,7 +44,7 @@
                                                 <Label text="Password:" styleClass="label-header" GridPane.rowIndex="2" />
                                                 <PasswordField fx:id="memberPasswordField" styleClass="password-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                                                <Label text="Membership Type:" styleClass="label-header" GridPane.rowIndex="3" />
+                                                <Label text="M/ship Type:" styleClass="label-header" GridPane.rowIndex="3" />
                                                 <ComboBox fx:id="membershipTypeCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                                                 <Label text="Price:" styleClass="label-header" GridPane.rowIndex="4" />
@@ -67,7 +67,7 @@
                     <content>
                         <VBox spacing="20.0" style="-fx-padding: 25;">
                             <children>
-                                <VBox styleClass="card" spacing="20.0">
+                                <VBox styleClass="expenses-card" spacing="20.0">
                                     <children>
                                         <Label text="Renew Membership" styleClass="title" />
                                         <GridPane hgap="20.0" vgap="15.0">
@@ -75,7 +75,7 @@
                                                 <Label text="Member ID:" styleClass="label-header" GridPane.rowIndex="0" />
                                                 <TextField fx:id="renewMemberIdField" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                                                <Label text="New Membership:" styleClass="label-header" GridPane.rowIndex="1" />
+                                                <Label text="New M/ship:" styleClass="label-header" GridPane.rowIndex="1" />
                                                 <ComboBox fx:id="renewMembershipCombo" styleClass="combo-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                                                 <Label text="Price:" styleClass="label-header" GridPane.rowIndex="2" />
@@ -98,7 +98,7 @@
                     <content>
                         <VBox spacing="20.0" style="-fx-padding: 25;">
                             <children>
-                                <VBox styleClass="card" spacing="20.0">
+                                <VBox styleClass="expenses-card" spacing="20.0">
                                     <children>
                                         <Label text="Record Payment" styleClass="title" />
                                         <GridPane hgap="20.0" vgap="15.0">
@@ -130,7 +130,10 @@
                         <VBox spacing="15.0" style="-fx-padding: 25;">
                             <children>
                                 <Label text="All Members" styleClass="title" />
-                                <TableView fx:id="membersTableView" prefHeight="350.0" prefWidth="750.0">
+                                <TableView fx:id="membersTableView" prefHeight="350.0" prefWidth="750.0" styleClass="expenses-table">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="memberIdColumn" prefWidth="75.0" text="ID" />
                                         <TableColumn fx:id="memberNameColumn" prefWidth="150.0" text="Name" />
