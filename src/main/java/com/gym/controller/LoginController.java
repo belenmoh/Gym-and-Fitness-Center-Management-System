@@ -82,8 +82,8 @@ public class LoginController {
             // Set user for the respective controller
             Object controller = loader.getController();
             if (controller instanceof com.gym.controller.AdminDashboardController c) c.setUser(user);
-            else if (controller instanceof ReceptionistDashboardController c) c.setUser(user);
-            else if (controller instanceof MemberDashboardController c) c.setUser(user);
+            else if (controller instanceof com.gym.controller.ReceptionistDashboardController c) c.setUser(user);
+            else if (controller instanceof com.gym.controller.MemberDashboardController c) c.setUser(user);
 
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
