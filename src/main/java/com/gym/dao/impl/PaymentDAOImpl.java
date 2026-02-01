@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-public class PaymentDAOImpl implements PaymentDAO{
+
+public class PaymentDAOImpl implements PaymentDAO {
+
     private static final String INSERT_SQL =
             "INSERT INTO payments (member_id, amount, date, type) VALUES (?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL =
@@ -255,5 +257,3 @@ public class PaymentDAOImpl implements PaymentDAO{
         return payment;
     }
 }
-
-
