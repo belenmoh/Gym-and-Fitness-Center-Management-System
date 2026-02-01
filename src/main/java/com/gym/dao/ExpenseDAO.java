@@ -5,7 +5,6 @@ import com.gym.model.ExpenseCategory;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 public interface ExpenseDAO {
     Expense save(Expense expense);
     Optional<Expense> findById(int id);
