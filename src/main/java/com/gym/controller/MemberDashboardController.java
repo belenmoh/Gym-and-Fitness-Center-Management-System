@@ -147,7 +147,6 @@ public class MemberDashboardController {
                 "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"
         ));
     }
-
     private void initializeBookingTableView() {
         bookingIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         classNameColumn.setCellValueFactory(new PropertyValueFactory<>("className"));
@@ -190,7 +189,6 @@ public class MemberDashboardController {
             }
         });
     }
-
     private void initializePaymentTableView() {
         paymentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
@@ -283,7 +281,6 @@ public class MemberDashboardController {
             bookingsTableView.setItems(bookingList);
         }
     }
-
     private void refreshPaymentsTable() {
         if (currentMember != null) {
             List<Payment> payments = paymentDAO.findByMemberId(currentMember.getMemberId());
@@ -291,7 +288,6 @@ public class MemberDashboardController {
             paymentsTableView.setItems(paymentList);
         }
     }
-
     private void clearBookingFields() {
         classNameCombo.getSelectionModel().clearSelection();
         classDatePicker.setValue(null);
