@@ -99,7 +99,6 @@ public class ReceptionistDashboardController {
                 "Monthly", "Annual", "VIP"
         ));
 
-        // Add listener to update price when membership type changes
         membershipTypeCombo.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldValue, newValue) -> updateMembershipPrice(newValue)
         );
