@@ -18,13 +18,11 @@ public class BillingService {
         this.paymentDAO = paymentDAO;
         this.membershipService = membershipService;
     }
-
     public Payment recordMembershipPayment(int memberId, double amount) {
         Optional<Member> memberOpt = membershipService.findMemberById(memberId);
         if (memberOpt.isEmpty()) {
             throw new IllegalArgumentException("Member not found");
         }
-
         Payment payment = new Payment();
         payment.setMemberId(memberId);
         payment.setAmount(amount);
@@ -39,7 +37,6 @@ public class BillingService {
         if (memberOpt.isEmpty()) {
             throw new IllegalArgumentException("Member not found");
         }
-
         Payment payment = new Payment();
         payment.setMemberId(memberId);
         payment.setAmount(amount);
@@ -54,7 +51,6 @@ public class BillingService {
         if (memberOpt.isEmpty()) {
             throw new IllegalArgumentException("Member not found");
         }
-
         Payment payment = new Payment();
         payment.setMemberId(memberId);
         payment.setAmount(amount);
@@ -67,29 +63,23 @@ public class BillingService {
     public Optional<Payment> findPaymentById(int id) {
         return paymentDAO.findById(id);
     }
-
     public List<Payment> getPaymentsByMember(int memberId) {
         return paymentDAO.findByMemberId(memberId);
     }
-
     public List<Payment> getPaymentsByType(PaymentType type) {
         return paymentDAO.findByType(type);
     }
-
     public List<Payment> getPaymentsByDateRange(LocalDate startDate, LocalDate endDate) {
         return paymentDAO.findByDateRange(startDate, endDate);
     }
-
     public List<Payment> getPaymentsByMonth(int month, int year) {
         return paymentDAO.findByMonth(month, year);
     }
-
     public double getTotalPaymentsByMember(int memberId) {
         return paymentDAO.findByMemberId(memberId).stream()
                 .mapToDouble(Payment::getAmount)
                 .sum();
     }
-
     public double getTotalPaymentsByMemberAndType(int memberId, PaymentType type) {
         return paymentDAO.findByMemberId(memberId).stream()
                 .filter(payment -> payment.getType() == type)
@@ -124,7 +114,6 @@ public class BillingService {
             return false;
         }
     }
-
     public boolean deletePayment(int paymentId) {
         try {
             return paymentDAO.delete(paymentId);
