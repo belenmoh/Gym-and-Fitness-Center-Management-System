@@ -18,9 +18,9 @@ public class LoginController {
     @FXML private TextField passwordTextField; // Visible field
     @FXML private Button showPasswordButton;
     @FXML private Label errorLabel;
-
     private final UserDAO userDAO = new UserDAOImpl();
     private boolean isPasswordVisible = false;
+
 
     @FXML
     private void togglePassword() {
@@ -75,11 +75,9 @@ public class LoginController {
                 case RECEPTIONIST -> "/fxml/ReceptionistDashboard.fxml";
                 case MEMBER -> "/fxml/MemberDashboard.fxml";
             };
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            // Set user for the respective controller
             Object controller = loader.getController();
             if (controller instanceof AdminDashboardController c) c.setUser(user);
             else if (controller instanceof ReceptionistDashboardController c) c.setUser(user);
