@@ -219,6 +219,7 @@ public class AdminDashboardController {
         );
         expenseCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
     }
+
     @FXML
     public void handleRefreshFinancial() {
         refreshFinancialData();
