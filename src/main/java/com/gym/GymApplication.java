@@ -39,4 +39,41 @@ public class GymApplication extends Application {
             throw new RuntimeException("Database initialization failed", e);
         }
     }
+    private void createDefaultUsers() {
+        UserDAO userDAO = new UserDAOImpl();
+
+        try {
+            if (!userDAO.existsByUsername("admin")) {
+                Admin admin = new Admin();
+                admin.setName("System Administrator");
+                admin.setUsername("admin");
+                admin.setPassword("admin123");
+                admin.setAdminId(1);
+                userDAO.save(admin);
+                System.out.println("Default admin user created: admin/admin123");
+            }
+
+            if (!userDAO.existsByUsername("receptionist")) {
+                Receptionist receptionist = new Receptionist();
+                receptionist.setName("John Receptionist");
+                receptionist.setUsername("receptionist");
+                receptionist.setPassword("rec123");
+                receptionist.setEmployeeId(1);
+                userDAO.save(receptionist);
+                System.out.println("Default receptionist user created: receptionist/rec123");
+            }
+
+            if (!userDAO.existsByUsername("member")) {
+                Member member = new Member();
+                member.setName("Jane Member");
+                member.setUsername("member");
+                member.setPassword("mem123");
+                userDAO.save(member);
+                System.out.println("Default member user created: member/mem123");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error creating default users: " + e.getMessage());
+        }
+    }
 }
