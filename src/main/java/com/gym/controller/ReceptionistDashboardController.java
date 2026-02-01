@@ -178,4 +178,199 @@ public class ReceptionistDashboardController {
 
         refreshMembersTable();
     }
+    @FXML
+    public void handleRegisterMember() {
+        try {
+            String name = memberNameField.getText().trim();
+            String username = memberUsernameField.getText().trim();
+            String password = memberPasswordField.getText().trim();
+            String membershipTypeStr = membershipTypeCombo.getValue();
+
+            if (name.isEmpty() || username.isEmpty() || password.isEmpty() ||
+                    membershipTypeStr == null) {
+                registerMessageLabel.setText("Please fill all fields");
+                registerMessageLabel.setStyle("-fx-text-fill: #e74c3c;");
+                return;
+            }
+
+            // Get price from the label instead of input field
+            double price = getMembershipPrice(membershipTypeStr);
+            Membership membership = membershipService.createMembership(membershipTypeStr, price);
+
+            Member member = new Member();
+            member.setName(name);
+            member.setUsername(username);
+            member.setPassword(password);
+            member.setMembership(membership);
+            member.setStartDate(LocalDate.now());
+            member.setEndDate(LocalDate.now().plusMonths(membership.getDurationMonths()));
+
+            Member registeredMember = membershipService.registerMember(member);
+
+            registerMessageLabel.setText("Member registered successfully! ID: " + registeredMember.getMemberId());
+            clearRegistrationFields();
+            refreshMembersTable();
+
+        } catch (NumberFormatException e) {
+            registerMessageLabel.setText("Invalid price format");
+        } catch (Exception e) {
+            registerMessageLabel.setText("Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleRenewMembership() {
+        try {
+            String memberIdStr = renewMemberIdField.getText().trim();
+            String membershipTypeStr = renewMembershipCombo.getValue();
+            String priceStr = renewPriceField.getText().trim();
+
+            if (memberIdStr.isEmpty() || membershipTypeStr == null || priceStr.isEmpty()) {
+                renewMessageLabel.setText("Please fill all fields");
+                return;
+            }
+
+            int memberId = Integer.parseInt(memberIdStr);
+            double price = Double.parseDouble(priceStr);
+            Membership newMembership = membershipService.createMembership(membershipTypeStr, price);
+
+            Member updatedMember = membershipService.renewMembership(memberId, newMembership);
+
+            renewMessageLabel.setText("Membership renewed successfully!");
+            clearRenewalFields();
+            refreshMembersTable();
+
+        } catch (NumberFormatException e) {
+            renewMessageLabel.setText("Invalid member ID or price format");
+        } catch (Exception e) {
+            renewMessageLabel.setText("Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleRecordPayment() {
+        try {
+            String memberIdStr = paymentMemberIdField.getText().trim();
+            String amountStr = paymentAmountField.getText().trim();
+            PaymentType paymentType = paymentTypeCombo.getValue();
+
+            if (memberIdStr.isEmpty() || amountStr.isEmpty() || paymentType == null) {
+                paymentMessageLabel.setText("Please fill all fields");
+                return;
+            }
+
+            int memberId = Integer.parseInt(memberIdStr);
+            double amount = Double.parseDouble(amountStr);
+
+            Payment payment = switch (paymentType) {
+                case MEMBERSHIP -> billingService.recordMembershipPayment(memberId, amount);
+                case CLASS -> billingService.recordClassPayment(memberId, amount);
+                case OTHER -> billingService.recordOtherPayment(memberId, amount);
+            };
+
+            paymentMessageLabel.setText("Payment recorded successfully! ID: " + payment.getId());
+            clearPaymentFields();
+
+        } catch (NumberFormatException e) {
+            paymentMessageLabel.setText("Invalid member ID or amount format");
+        } catch (Exception e) {
+            paymentMessageLabel.setText("Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleRefreshMembers() {
+        refreshMembersTable();
+    }
+
+    @FXML
+    public void handleLogout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) welcomeLabel.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Gym & Fitness Center - Login");
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading login screen: " + e.getMessage());
+        }
+    }
+
+    private void refreshMembersTable() {
+        try {
+            List<Member> members = membershipService.getAllMembers();
+            ObservableList<Member> memberList = FXCollections.observableArrayList(members);
+            membersTableView.setItems(memberList);
+        } catch (Exception e) {
+            System.err.println("Error loading members table: " + e.getMessage());
+            // Set empty list to prevent UI crash
+            membersTableView.setItems(FXCollections.observableArrayList());
+        }
+    }
+
+    private void clearRegistrationFields() {
+        memberNameField.clear();
+        memberUsernameField.clear();
+        memberPasswordField.clear();
+        membershipTypeCombo.getSelectionModel().clearSelection();
+        membershipPriceLabel.setText("ETB 0.00");
+    }
+
+    private void clearRenewalFields() {
+        renewMemberIdField.clear();
+        renewMembershipCombo.getSelectionModel().clearSelection();
+        renewPriceField.clear();
+    }
+
+    private void clearPaymentFields() {
+        paymentMemberIdField.clear();
+        paymentAmountField.clear();
+        paymentTypeCombo.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    public void handleCancelMembership() {
+        Member selectedMember = membersTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedMember == null) {
+            cancelMembershipMessageLabel.setText("Please select a member to cancel membership");
+            cancelMembershipMessageLabel.setStyle("-fx-text-fill: #e74c3c;");
+            return;
+        }
+
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Cancel Membership");
+        confirmDialog.setHeaderText("Cancel Membership for " + selectedMember.getName());
+        confirmDialog.setContentText("Are you sure you want to cancel the membership for " + selectedMember.getName() + "?\n\nThis action cannot be undone.");
+
+        if (confirmDialog.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
+            try {
+                // Set membership end date to today (effectively cancelling)
+                Member updatedMember = new Member();
+                updatedMember.setId(selectedMember.getId());
+                updatedMember.setMemberId(selectedMember.getMemberId());
+                updatedMember.setName(selectedMember.getName());
+                updatedMember.setUsername(selectedMember.getUsername());
+                updatedMember.setPassword(selectedMember.getPassword());
+                updatedMember.setMembership(selectedMember.getMembership());
+                updatedMember.setStartDate(selectedMember.getStartDate());
+                updatedMember.setEndDate(LocalDate.now()); // Set to today to cancel
+
+                memberDAO.update(updatedMember);
+
+                cancelMembershipMessageLabel.setText("Membership cancelled successfully for " + selectedMember.getName());
+                cancelMembershipMessageLabel.setStyle("-fx-text-fill: #27ae60;");
+
+                // Refresh the members table
+                refreshMembersTable();
+
+            } catch (Exception e) {
+                cancelMembershipMessageLabel.setText("Error cancelling membership: " + e.getMessage());
+                cancelMembershipMessageLabel.setStyle("-fx-text-fill: #e74c3c;");
+            }
+        }
+    }
 }
