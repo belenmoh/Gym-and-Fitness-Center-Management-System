@@ -123,4 +123,100 @@ public class AdminDashboardController {
 
     @FXML
     private Label reportNetFlowLabel;
+
+    private User currentUser;
+    private final PaymentDAO paymentDAO = new PaymentDAOImpl();
+    private final ExpenseDAO expenseDAO = new ExpenseDAOImpl();
+    private final FinancialService financialService = new FinancialService(paymentDAO, expenseDAO);
+
+    public void setUser(User user) {
+        this.currentUser = user;
+        welcomeLabel.setText("Welcome: " + user.getName());
+        initializeComboBoxes();
+        initializePaymentTableView();
+        initializeExpenseTableView();
+        refreshFinancialData();
+        refreshPaymentsTable();
+        refreshExpensesTable();
+    }
+
+    private void initializeComboBoxes() {
+        expenseCategoryCombo.setItems(FXCollections.observableArrayList(ExpenseCategory.values()));
+
+        reportMonthCombo.setItems(FXCollections.observableArrayList(
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+        ));
+
+        List<String> years = new java.util.ArrayList<>();
+        int currentYear = LocalDate.now().getYear();
+        for (int i = currentYear - 5; i <= currentYear + 5; i++) {
+            years.add(String.valueOf(i));
+        }
+        reportYearCombo.setItems(FXCollections.observableArrayList(years));
+        reportYearCombo.setValue(String.valueOf(currentYear));
+
+        LocalDate now = LocalDate.now();
+        reportMonthCombo.setValue(getMonthName(now.getMonthValue()));
+    }
+
+    private String getMonthName(int month) {
+        return switch (month) {
+            case 1 -> "January";
+            case 2 -> "February";
+            case 3 -> "March";
+            case 4 -> "April";
+            case 5 -> "May";
+            case 6 -> "June";
+            case 7 -> "July";
+            case 8 -> "August";
+            case 9 -> "September";
+            case 10 -> "October";
+            case 11 -> "November";
+            case 12 -> "December";
+            default -> "January";
+        };
+    }
+
+    private int getMonthNumber(String monthName) {
+        return switch (monthName) {
+            case "January" -> 1;
+            case "February" -> 2;
+            case "March" -> 3;
+            case "April" -> 4;
+            case "May" -> 5;
+            case "June" -> 6;
+            case "July" -> 7;
+            case "August" -> 8;
+            case "September" -> 9;
+            case "October" -> 10;
+            case "November" -> 11;
+            case "December" -> 12;
+            default -> 1;
+        };
+    }
+
+    private void initializePaymentTableView() {
+        paymentIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        paymentMemberIdColumn.setCellValueFactory(new PropertyValueFactory<>("memberId"));
+        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        paymentDateColumn.setCellValueFactory(cellData ->
+                javafx.beans.binding.Bindings.createStringBinding(
+                        () -> cellData.getValue().getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                )
+        );
+        paymentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+    }
+
+    private void initializeExpenseTableView() {
+        expenseIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        expenseDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        expenseAmountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        expenseDateColumn.setCellValueFactory(cellData ->
+                javafx.beans.binding.Bindings.createStringBinding(
+                        () -> cellData.getValue().getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                )
+        );
+        expenseCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+    }
 }
