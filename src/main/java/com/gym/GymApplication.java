@@ -16,5 +16,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GymApplication extends Application {
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        initializeDatabase();
+        createDefaultUsers();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Gym & Fitness Center Management System");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
 }
