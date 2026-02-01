@@ -45,6 +45,7 @@ public class BookingDAOImpl implements BookingDAO {
             stmt.setString(3, booking.getBookingTime().format(DATE_TIME_FORMATTER));
             stmt.setString(4, booking.getClassTime().format(DATE_TIME_FORMATTER));
             stmt.setString(5, booking.getStatus().name());
+
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Creating booking failed, no rows affected.");
