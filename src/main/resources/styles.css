@@ -302,3 +302,17 @@
 .expenses-table .filler {
     -fx-background-color: transparent;
 }
+.text-field, .password-field {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #99A3A4;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: #E6B0AA;
+}
