@@ -8,7 +8,6 @@ public class FinancialReport {
     private double netCashFlow;
 
     public FinancialReport() {}
-
     public FinancialReport(int month, int year, double totalIncome, double totalExpenses) {
         this.month = month;
         this.year = year;
@@ -20,19 +19,15 @@ public class FinancialReport {
     public int getMonth() {
         return month;
     }
-
     public void setMonth(int month) {
         this.month = month;
     }
-
     public int getYear() {
         return year;
     }
-
     public void setYear(int year) {
         this.year = year;
     }
-
     public double getTotalIncome() {
         return totalIncome;
     }
@@ -41,16 +36,13 @@ public class FinancialReport {
         this.totalIncome = totalIncome;
         this.netCashFlow = this.totalIncome - this.totalExpenses;
     }
-
     public double getTotalExpenses() {
         return totalExpenses;
     }
-
     public void setTotalExpenses(double totalExpenses) {
         this.totalExpenses = totalExpenses;
         this.netCashFlow = this.totalIncome - this.totalExpenses;
     }
-
     public double getNetCashFlow() {
         return netCashFlow;
     }
